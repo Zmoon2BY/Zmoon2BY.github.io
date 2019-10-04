@@ -323,8 +323,11 @@
       
         
           
-          数论算法详解1. 整数的取余运算定义 带余除法 设 $a,b$ 是整数，且 $b&gt;0$ ，则存在非负整数 $q,r$ ，使得$$a=bq+r$$且 $0\le r&lt;b$ ，称 $q$ 为商， $r$ 为余数
-显然带余除法中的商和余数都是唯一的，在下文中将商记为 $a/b$ ，将余数记为 $a%b$，“/”与“%”的运算优先级与乘除法相同，当然，在C语言中二者分别对应 a/b 与 a%b
+          数论算法详解1. 整数的取余运算定义 带余除法 设 $a,b$ 是整数，且 $b&gt;0$ ，则存在非负整数 $q,r$ ，使得
+
+a=bq+r且 $0\le r&lt;b$ ，称 $q$ 为商， $r$ 为余数
+显然带余除法中的商和余数都是唯一的，在下文中将商记为 $a/b$ ，将余数记为 $a\%b$，“/”与“%”的运算优先级与乘除法相同，当然，在C语言中二者分别对应 a/b 与 a%b
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -768,6 +771,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
