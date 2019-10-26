@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="朴素贝叶斯分类器part one实验要求：随机产生10000组正样本和20000负样本高斯分布的数据集合（维数设为二维），要求正样本：均值为[1;3]，方差为[2 0;0 2]；负样本：均值为[10;20]，方差为[10 0;0 10]。先验概率按样本量设定为1/3和2/3.分别利用最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器对其分类。（假设风险程度正样本分错风险系数为0.6，负样本分错风险">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习实验朴素贝叶斯分类器">
+<meta property="og:url" content="http://yoursite.com/2019/10/25/机器学习实验朴素贝叶斯分类器/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="朴素贝叶斯分类器part one实验要求：随机产生10000组正样本和20000负样本高斯分布的数据集合（维数设为二维），要求正样本：均值为[1;3]，方差为[2 0;0 2]；负样本：均值为[10;20]，方差为[10 0;0 10]。先验概率按样本量设定为1/3和2/3.分别利用最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器对其分类。（假设风险程度正样本分错风险系数为0.6，负样本分错风险">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p1准确率.jpg">
+<meta property="og:image" content="http://yoursite.com/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p2准确率.jpg">
+<meta property="og:image" content="http://yoursite.com/Users/stayhome/Library/Application%20Support/typora-user-images/image-20191026185130007.png">
+<meta property="og:updated_time" content="2019-10-26T10:56:13.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习实验朴素贝叶斯分类器">
+<meta name="twitter:description" content="朴素贝叶斯分类器part one实验要求：随机产生10000组正样本和20000负样本高斯分布的数据集合（维数设为二维），要求正样本：均值为[1;3]，方差为[2 0;0 2]；负样本：均值为[10;20]，方差为[10 0;0 10]。先验概率按样本量设定为1/3和2/3.分别利用最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器对其分类。（假设风险程度正样本分错风险系数为0.6，负样本分错风险">
+<meta name="twitter:image" content="http://yoursite.com/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p1准确率.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/25/机器学习实验朴素贝叶斯分类器/">
+
+
+
+
+
+  <title>机器学习实验朴素贝叶斯分类器 | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/25/机器学习实验朴素贝叶斯分类器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zpy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习实验朴素贝叶斯分类器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-25T20:42:54+08:00">
+                2019-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="朴素贝叶斯分类器"><a href="#朴素贝叶斯分类器" class="headerlink" title="朴素贝叶斯分类器"></a>朴素贝叶斯分类器</h1><h3 id="part-one"><a href="#part-one" class="headerlink" title="part one"></a>part one</h3><p><strong>实验要求</strong>：随机产生10000组正样本和20000负样本高斯分布的数据集合（维数设为二维），要求正样本：均值为[1;3]，方差为[2 0;0 2]；负样本：均值为[10;20]，方差为[10 0;0 10]。先验概率按样本量设定为1/3和2/3.分别利用最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器对其分类。（假设风险程度正样本分错风险系数为0.6，负样本分错风险为0.4，该设定仅用于最小风险分析）</p>
+<p>对于该实验，首先我利用了python的numpy包中的函数np.random.multivariate_normal()进行二维高斯分布数据集的生成，并保存在test_data.txt之中，详细可以参照data.py文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_Gauss</span><span class="params">(mean,cov,size)</span>:</span></span><br><span class="line">    data = np.random.multivariate_normal(mean,cov,size)</span><br><span class="line">    <span class="keyword">return</span> np.round(data,<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>打开test_data.txt文件可以看到生成好的数据如下，其中第三维为1的是正样本，为0的是负样本。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.1232</span>,<span class="number">5.0389</span>,<span class="number">1</span></span><br><span class="line"><span class="number">-0.5892</span>,<span class="number">1.494</span>,<span class="number">1</span></span><br><span class="line"><span class="number">5.7076</span>,<span class="number">21.1359</span>,<span class="number">0</span></span><br><span class="line"><span class="number">16.3716</span>,<span class="number">16.4631</span>,<span class="number">0</span></span><br><span class="line"><span class="number">11.3369</span>,<span class="number">23.5091</span>,<span class="number">0</span></span><br><span class="line"><span class="number">10.032</span>,<span class="number">20.7587</span>,<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>接下来便是设计最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器，由于该问题已知先验概率为1/3和2/3，并且为高斯分布，所以我的思路是利用已知样本去计算出二维高斯分布的均值和协方差矩阵，用所得均值和协方差矩阵去计算某个样本点属于哪类的概率，最后利用最小错误和最小风险的评判标准分别对其进行分类，统计得出最后的正确率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calGauss</span><span class="params">(mean,cov,x,y)</span>:</span></span><br><span class="line">    px = <span class="number">1.0</span>/math.sqrt(<span class="number">2</span>*math.pi*cov[<span class="number">0</span>][<span class="number">0</span>]*cov[<span class="number">0</span>][<span class="number">0</span>])*math.exp(<span class="number">-1.0</span>*(x-mean[<span class="number">0</span>])*(x-mean[<span class="number">0</span>])/(<span class="number">2</span>*cov[<span class="number">0</span>][<span class="number">0</span>]*cov[<span class="number">0</span>][<span class="number">0</span>]))</span><br><span class="line">    py = <span class="number">1.0</span>/math.sqrt(<span class="number">2</span>*math.pi*cov[<span class="number">1</span>][<span class="number">1</span>]*cov[<span class="number">1</span>][<span class="number">1</span>])*math.exp(<span class="number">-1.0</span>*(y-mean[<span class="number">1</span>])*(y-mean[<span class="number">1</span>])/(<span class="number">2</span>*cov[<span class="number">1</span>][<span class="number">1</span>]*cov[<span class="number">1</span>][<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">return</span> np.round(px*py,<span class="number">6</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minError</span><span class="params">(pyes,pno)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> pyes&gt;=pno :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minRisk</span><span class="params">(pyes,pno)</span>:</span></span><br><span class="line">    L=[[<span class="number">0</span>,<span class="number">0.6</span>],[<span class="number">0.4</span>,<span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">if</span> pno*L[<span class="number">0</span>][<span class="number">1</span>]&gt;=pyes*L[<span class="number">1</span>][<span class="number">0</span>] :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>以上为计算某点的条件概率及概率密度函数对应的取值，以及最小错误率和最小风险的判断过程，因为目的是二分类，所以只分了正例和反例</p>
+<p>之后是计算均值与方差的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mean</span><span class="params">(list1)</span>:</span></span><br><span class="line">  list1 = [float(x) <span class="keyword">for</span> x <span class="keyword">in</span> list1] </span><br><span class="line">  <span class="keyword">return</span> sum(list1)/float(len(list1))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">var</span><span class="params">(list1,list2)</span>:</span></span><br><span class="line">  list2 = [float(x) <span class="keyword">for</span> x <span class="keyword">in</span> list2]</span><br><span class="line">  avg = mean(list2)</span><br><span class="line">  var = sum([math.pow((x-avg),<span class="number">2</span>) <span class="keyword">for</span> x <span class="keyword">in</span> list1])/float(len(list1)<span class="number">-1</span>)</span><br><span class="line">  <span class="keyword">return</span> var</span><br></pre></td></tr></table></figure>
+<p>对于训练朴素贝叶斯分类器的实现，我的做法是将训练集的每一条数据遍历一边，根据label进行分类，之后分别计算得到正例和反例的均值和协方差矩阵，并返回作为分类器的参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(test_data)</span>:</span></span><br><span class="line">    m=[]</span><br><span class="line">    c=[]</span><br><span class="line">    yes=[[],[]]</span><br><span class="line">    no=[[],[]]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(test_data)):</span><br><span class="line">        x=test_data[i][<span class="number">0</span>]</span><br><span class="line">        y=test_data[i][<span class="number">1</span>]</span><br><span class="line">        label=test_data[i][<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">if</span> label==<span class="number">1</span> :</span><br><span class="line">            yes[<span class="number">0</span>].append(x)</span><br><span class="line">            yes[<span class="number">1</span>].append(y)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            no[<span class="number">0</span>].append(x)</span><br><span class="line">            no[<span class="number">1</span>].append(y)</span><br><span class="line">    m.append([mean(yes[<span class="number">0</span>]),mean(yes[<span class="number">1</span>])])</span><br><span class="line">    m.append([mean(no[<span class="number">0</span>]),mean(no[<span class="number">1</span>])])</span><br><span class="line">    c.append([[var(yes[<span class="number">0</span>],yes[<span class="number">0</span>]),var(yes[<span class="number">0</span>],yes[<span class="number">1</span>])],[var(yes[<span class="number">1</span>],yes[:][<span class="number">0</span>]),var(yes[<span class="number">1</span>],yes[<span class="number">1</span>])]])</span><br><span class="line">    c.append([[var(no[<span class="number">0</span>],no[<span class="number">0</span>]),var(no[<span class="number">0</span>],no[<span class="number">1</span>])],[var(no[<span class="number">1</span>],no[<span class="number">0</span>]),var(no[<span class="number">1</span>],no[<span class="number">1</span>])]])</span><br><span class="line">    <span class="keyword">return</span> m,c</span><br></pre></td></tr></table></figure>
+<p>分类过程就是将数据集遍历一边，根据（x,y,label）中的x,y坐标利用二维高斯分布概率密度函数计算得到其属于正例和反例的条件概率，并分别乘以对应的先验概率，最后依据得到的概率按照最小风险和最小错误的判断标准对其进行分类，将得到的类别与label进行比对，统计分类错误的数据数，利用1-错误率得到正确率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bayes</span><span class="params">(test_data,mean,cov)</span>:</span></span><br><span class="line">    p1=<span class="number">1</span>/<span class="number">3</span></span><br><span class="line">    p2=<span class="number">2</span>/<span class="number">3</span></span><br><span class="line">    Ecnt=<span class="number">0</span></span><br><span class="line">    Rcnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(test_data)):</span><br><span class="line">        x=test_data[i][<span class="number">0</span>]</span><br><span class="line">        y=test_data[i][<span class="number">1</span>]</span><br><span class="line">        label=test_data[i][<span class="number">2</span>]</span><br><span class="line">        pyes=p1*calGauss(mean[<span class="number">0</span>],cov[<span class="number">0</span>],x,y)</span><br><span class="line">        pno=p2*calGauss(mean[<span class="number">1</span>],cov[<span class="number">1</span>],x,y)</span><br><span class="line">        predict=minError(pyes,pno)</span><br><span class="line">        <span class="keyword">if</span> predict!=label :</span><br><span class="line">            Ecnt=Ecnt+<span class="number">1</span></span><br><span class="line">        predict=minRisk(pyes,pno)</span><br><span class="line">        <span class="keyword">if</span> predict!=label :</span><br><span class="line">            Rcnt=Rcnt+<span class="number">1</span></span><br><span class="line">    print(<span class="string">"使用最小风险概率贝叶斯分类器的正确率为%.5f%%"</span>%float((len(test_data)-Rcnt)/len(test_data)*<span class="number">100</span>))</span><br><span class="line">    print(<span class="string">"使用最小错误概率贝叶斯分类器的正确率为%.5f%%"</span>%float((len(test_data)-Ecnt)/len(test_data)*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+<p>运行得到的结果如下图，代码为naive_bayes1.py文件</p>
+<p><img src="/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p1准确率.jpg" alt="p1准确率"></p>
+<p>对于part one的实验，我开始的想法是利用自己较为熟悉的C++来模拟朴素贝叶斯分类器的过程，因为之前自己对于python这一工具并不算熟悉，最终决定用python来实现是因为考虑到之后的实验可能没有python完成起来比较困难，所以逼着自己对照着python的文档进行学习，但是本次实验仍有很多地方的实现我不是很满意，例如训练过程和预测过程的代码都只是针对二分类问题的，在此基础之上没有继续的进行封装，这是一次面向数据集、面向过程的实验。另外，根据最小风险与最小错误两者之间正确率差距不大的问题，我更改了一下风险系数，发现当其相差10个数量级时，才会对结果造成较大影响</p>
+<h3 id="part-two"><a href="#part-two" class="headerlink" title="part two"></a>part two</h3><p>给定汽车评价数据集，下载链接：<a href="http://archive.ics.uci.edu/ml/datasets/Car+Evaluation，利用贝叶斯算法进行数据分类操作，并统计其预测正确率。" target="_blank" rel="noopener">http://archive.ics.uci.edu/ml/datasets/Car+Evaluation，利用贝叶斯算法进行数据分类操作，并统计其预测正确率。</a></p>
+<p>（1）<strong>数据描述</strong></p>
+<p>共1728个数据，每个数据特征为6维，分为4类，类别标记为unacc，acc，good，V-good</p>
+<p>四个类别标记分别表示汽车性价比等级（由低到高）</p>
+<p>unacc：1210个</p>
+<p>acc：384个</p>
+<p>good：69个</p>
+<p>V-good：65个</p>
+<p>6个特征分别为：（6个属性）</p>
+<p>1、buying （取值：v-high、high、med、low）  表示购买价格</p>
+<p>2、maint  （取值： v-high、high、med、low） 表示维修价格</p>
+<p>3、door    （取值：2、3、4、5-more）        车门数量</p>
+<p>4、Persons  （取值：2、4、more）            可容纳人数</p>
+<p>5、Lug_boot  （取值：small、med、big）       行李箱大小</p>
+<p>6、Safety      （取值：low、med、high）     安全系数</p>
+<p>（2）<strong>实验完成要求</strong></p>
+<ol>
+<li><p>仔细阅读实验说明并了解数据集；</p>
+</li>
+<li><p>使用任何一种熟悉的计算机语言（比如 C，Java或者MATLAB）实现朴素贝叶斯算法；</p>
+</li>
+<li><p>利用10折交叉验证，对所设计的贝叶斯分类器进行性能评估；</p>
+</li>
+<li><p>提交代码，统计并分析实验结果，上交实验报告；</p>
+</li>
+</ol>
+<p>对于该实验，首先根据给出的实验要求下载数据集并观察数据，发现类别共分为4类：unacc、acc、good、vgood，特征共6个，buying （取值：v-high、high、med、low）表示购买价格、maint  （取值： v-high、high、med、low） 表示维修价格、door    （取值：2、3、4、5-more）车门数量、Persons  （取值：2、4、more） 可容纳人数、Lug_boot （取值：small、med、big）行李箱大小、Safety （取值：low、med、high）     安全系数，特征最高维度是4，故可以做出如下映射：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Class=&#123;<span class="string">'unacc'</span>:<span class="number">0</span>,<span class="string">'acc'</span>:<span class="number">1</span>, <span class="string">'good'</span>:<span class="number">2</span>, <span class="string">'vgood'</span>:<span class="number">3</span>&#125;</span><br><span class="line">Xvector = [&#123;<span class="string">'vhigh'</span>:<span class="number">0</span>, <span class="string">'high'</span>:<span class="number">1</span>, <span class="string">'med'</span>:<span class="number">2</span>, <span class="string">'low'</span>:<span class="number">3</span>&#125;,</span><br><span class="line">         &#123;<span class="string">'vhigh'</span>:<span class="number">0</span>, <span class="string">'high'</span>:<span class="number">1</span>, <span class="string">'med'</span>:<span class="number">2</span>, <span class="string">'low'</span>:<span class="number">3</span>&#125;,</span><br><span class="line">         &#123;<span class="string">'2'</span>:<span class="number">0</span>, <span class="string">'3'</span>:<span class="number">1</span>, <span class="string">'4'</span>:<span class="number">2</span>, <span class="string">'5more'</span>:<span class="number">3</span>&#125;,</span><br><span class="line">         &#123;<span class="string">'2'</span>:<span class="number">0</span>, <span class="string">'4'</span>:<span class="number">1</span>, <span class="string">'more'</span>:<span class="number">2</span>&#125;,</span><br><span class="line">         &#123;<span class="string">'small'</span>:<span class="number">0</span>, <span class="string">'med'</span>:<span class="number">1</span>, <span class="string">'big'</span>:<span class="number">2</span>&#125;,</span><br><span class="line">         &#123;<span class="string">'low'</span>:<span class="number">0</span>, <span class="string">'med'</span>:<span class="number">1</span>, <span class="string">'high'</span>:<span class="number">2</span>&#125;]</span><br></pre></td></tr></table></figure>
+<p>对于朴素贝叶斯分类器的设计，我的第一想法是像part one那样去拟合4个六维高斯分布概率函数，根据概率函数得到条件概率，并与先验概率相乘得到为某一类的概率大小，从中取最大的那个。与同学讨论之后，感觉数据不合适，于是选择计算属于Y类的先验概率，可以通过训练集中Y类样本的集合大小/所有训练集的集合大小，以及属于Y类的样本并且样本第i个特征值为x的概率的三维矩阵，那么某个样本属于Y类条件概率便是所有特征i对应取值x在概率矩阵中对应元素的乘积，之后乘属于Y的先验概率，最后在所有类中取最大值对应的类，以此进行分类</p>
+<p>难点在于如何求得上述描述的属于Y类的样本并且样本第i个特征值为x的概率的三维矩阵，在与同学的交流中，我发现大多数同学的实现方式都比较“暴力”，挨个统计Y的个数和Y，i，x的个数然后相除，每一次都要for一边，时间复杂度方面爆炸</p>
+<p>我的做法是用一个4 x 6 x 4的三维矩阵初始化为0，枚举每一条数据，分别求得对应的标签label、特征i、特征取值vi，并利用map将字符对应到矩阵的单元格上，累计其数目，得到一个三维的数目矩阵</p>
+<p>然后计算属于y类的先验概率向量proy，y类的个数/总数即可</p>
+<p>之后计算三维概率矩阵，按照类别、特征、特征取值进行枚举，结果为数目矩阵对应单元格/对应类别的总数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(data)</span>:</span></span><br><span class="line">    matrix=np.zeros((<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">    datasum=len(data)</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> data:</span><br><span class="line">        label=Class[d[<span class="number">-1</span>]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(d)<span class="number">-1</span>):</span><br><span class="line">            vi=Xvector[i][d[i]]</span><br><span class="line">            matrix[label][i][vi] +=<span class="number">1</span></span><br><span class="line">    proy=[]</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> Class.values():</span><br><span class="line">        numy=np.sum(matrix[y][<span class="number">0</span>])</span><br><span class="line">        proy.append(numy/datasum)</span><br><span class="line">    proxy=np.zeros((<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> Class.values():</span><br><span class="line">        numy=np.sum(matrix[y][<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(len(Xvector)):</span><br><span class="line">            <span class="keyword">for</span> vi <span class="keyword">in</span> Xvector[x].values():</span><br><span class="line">                proxy[y][x][vi]=matrix[y][x][vi]/numy</span><br><span class="line">    <span class="keyword">return</span> proxy,proy</span><br></pre></td></tr></table></figure>
+<p>检验部分，根据上述返回的先验概率和条件概率，求得数据对应的属于每个类概率，根据最小错误的原则选择概率值最大的，为避免精度误差，概率统一乘了100000,根据分类结果是否与label一致，统计错误个数，求得正确率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calacc</span><span class="params">(proxy,proy,data)</span>:</span></span><br><span class="line">    datanum=len(data)</span><br><span class="line">    cnt=<span class="number">0</span></span><br><span class="line">    dataclass=[]</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> data:</span><br><span class="line">        proyx=[]</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> Class.values():</span><br><span class="line">            p=<span class="number">100000</span></span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> range(len(Xvector)):</span><br><span class="line">                vi=Xvector[x][d[x]]</span><br><span class="line">                p*=proxy[y][x][vi]</span><br><span class="line">            p*=proy[y]</span><br><span class="line">            proyx.append(p)</span><br><span class="line">        dataclass.append(proyx.index(max(proyx)))</span><br><span class="line">        <span class="keyword">if</span> dataclass[<span class="number">-1</span>]!=Class[d[<span class="number">-1</span>]] :</span><br><span class="line">            cnt+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> dataclass,(datanum-cnt)/datanum*<span class="number">100</span></span><br></pre></td></tr></table></figure>
+<p>利用10折交叉验证，对所设计的贝叶斯分类器进行性能评估，利用random库里的shuflle函数进行随机排列，将数据分为10块，枚举选择其中一块为检验数据，其余九块为训练数据进行训练，将得到的正确率相加取平均值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crossVal</span><span class="params">(data,n)</span>:</span></span><br><span class="line">    <span class="keyword">from</span> random <span class="keyword">import</span> shuffle</span><br><span class="line">    shuffle(data)</span><br><span class="line">    datasq=[]</span><br><span class="line">    sum=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        datasq.append([])</span><br><span class="line">    datanum=len(data)</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> range(datanum) :</span><br><span class="line">        datasq[d%n].append(data[d])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        traindata=[]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> i!=j:</span><br><span class="line">                traindata=traindata+datasq[j]</span><br><span class="line">        proxy,proy=train(traindata)</span><br><span class="line">        preres,res=calacc(proxy,proy,datasq[i])</span><br><span class="line">        sum+=res/n</span><br><span class="line">    print(<span class="string">"使用最小错误概率贝叶斯分类器的正确率为%.5f%%"</span>%float(sum))</span><br></pre></td></tr></table></figure>
+<p>得到的结果如下图，正确率为85%左右，还算比较成功</p>
+<p><img src="/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p2准确率.jpg" alt="p2准确率"></p>
+<p>在实验中，读入时出现如下问题</p>
+<p><img src="/Users/stayhome/Library/Application Support/typora-user-images/image-20191026185130007.png" alt="image-20191026185130007"></p>
+<p>最后的类别带一个’\n’，解决方法为先将所有的数据读入，然后每一个数据去掉最后一个’\n’，再进行分割</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(filename,<span class="string">'r'</span>) <span class="keyword">as</span> file:</span><br><span class="line">        temp=file.readlines()</span><br><span class="line">    data=[]</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> temp:</span><br><span class="line">        t=t[:<span class="number">-1</span>]</span><br><span class="line">        t=t.split(<span class="string">','</span>)</span><br><span class="line">        data.append(t)</span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+<p>结果运行时发现最后一组数据没有’\n’，所以读入类别vgoo，显示报错，手动加了一个回车后答案正确，为此调试了很久很久。详细代码在naive_bayes2.py中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/09/十月-十一月DDL/" rel="next" title="十月&&十一月DDL">
+                <i class="fa fa-chevron-left"></i> 十月&&十一月DDL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zpy</p>
+              <p class="site-description motion-element" itemprop="description">当时只道是寻常</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zpy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
