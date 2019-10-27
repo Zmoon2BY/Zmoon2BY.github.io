@@ -84,17 +84,13 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习实验朴素贝叶斯分类器">
 <meta property="og:url" content="http://yoursite.com/2019/10/25/机器学习实验朴素贝叶斯分类器/index.html">
-<meta property="og:site_name" content="养生划水">
+<meta property="og:site_name" content="我是胖头鱼">
 <meta property="og:description" content="朴素贝叶斯分类器part one实验要求：随机产生10000组正样本和20000负样本高斯分布的数据集合（维数设为二维），要求正样本：均值为[1;3]，方差为[2 0;0 2]；负样本：均值为[10;20]，方差为[10 0;0 10]。先验概率按样本量设定为1/3和2/3.分别利用最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器对其分类。（假设风险程度正样本分错风险系数为0.6，负样本分错风险">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p1准确率.jpg">
-<meta property="og:image" content="http://yoursite.com/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p2准确率.jpg">
-<meta property="og:image" content="http://yoursite.com/Users/stayhome/Library/Application%20Support/typora-user-images/image-20191026185130007.png">
-<meta property="og:updated_time" content="2019-10-26T10:56:13.512Z">
+<meta property="og:updated_time" content="2019-10-27T02:20:47.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习实验朴素贝叶斯分类器">
 <meta name="twitter:description" content="朴素贝叶斯分类器part one实验要求：随机产生10000组正样本和20000负样本高斯分布的数据集合（维数设为二维），要求正样本：均值为[1;3]，方差为[2 0;0 2]；负样本：均值为[10;20]，方差为[10 0;0 10]。先验概率按样本量设定为1/3和2/3.分别利用最小错误概率贝叶斯分类器和最小风险概率贝叶斯分类器对其分类。（假设风险程度正样本分错风险系数为0.6，负样本分错风险">
-<meta name="twitter:image" content="http://yoursite.com/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p1准确率.jpg">
 
 
 
@@ -130,7 +126,7 @@
 
 
 
-  <title>机器学习实验朴素贝叶斯分类器 | 养生划水</title>
+  <title>机器学习实验朴素贝叶斯分类器 | 我是胖头鱼</title>
   
 
 
@@ -160,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">养生划水</span>
+        <span class="site-title">我是胖头鱼</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -256,7 +252,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="养生划水">
+      <meta itemprop="name" content="我是胖头鱼">
     </span>
 
     
@@ -329,7 +325,7 @@
 <p>分类过程就是将数据集遍历一边，根据（x,y,label）中的x,y坐标利用二维高斯分布概率密度函数计算得到其属于正例和反例的条件概率，并分别乘以对应的先验概率，最后依据得到的概率按照最小风险和最小错误的判断标准对其进行分类，将得到的类别与label进行比对，统计分类错误的数据数，利用1-错误率得到正确率</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bayes</span><span class="params">(test_data,mean,cov)</span>:</span></span><br><span class="line">    p1=<span class="number">1</span>/<span class="number">3</span></span><br><span class="line">    p2=<span class="number">2</span>/<span class="number">3</span></span><br><span class="line">    Ecnt=<span class="number">0</span></span><br><span class="line">    Rcnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(test_data)):</span><br><span class="line">        x=test_data[i][<span class="number">0</span>]</span><br><span class="line">        y=test_data[i][<span class="number">1</span>]</span><br><span class="line">        label=test_data[i][<span class="number">2</span>]</span><br><span class="line">        pyes=p1*calGauss(mean[<span class="number">0</span>],cov[<span class="number">0</span>],x,y)</span><br><span class="line">        pno=p2*calGauss(mean[<span class="number">1</span>],cov[<span class="number">1</span>],x,y)</span><br><span class="line">        predict=minError(pyes,pno)</span><br><span class="line">        <span class="keyword">if</span> predict!=label :</span><br><span class="line">            Ecnt=Ecnt+<span class="number">1</span></span><br><span class="line">        predict=minRisk(pyes,pno)</span><br><span class="line">        <span class="keyword">if</span> predict!=label :</span><br><span class="line">            Rcnt=Rcnt+<span class="number">1</span></span><br><span class="line">    print(<span class="string">"使用最小风险概率贝叶斯分类器的正确率为%.5f%%"</span>%float((len(test_data)-Rcnt)/len(test_data)*<span class="number">100</span>))</span><br><span class="line">    print(<span class="string">"使用最小错误概率贝叶斯分类器的正确率为%.5f%%"</span>%float((len(test_data)-Ecnt)/len(test_data)*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
 <p>运行得到的结果如下图，代码为naive_bayes1.py文件</p>
-<p><img src="/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p1准确率.jpg" alt="p1准确率"></p>
+<p>​                                                                 <del>图片挂了</del></p>
 <p>对于part one的实验，我开始的想法是利用自己较为熟悉的C++来模拟朴素贝叶斯分类器的过程，因为之前自己对于python这一工具并不算熟悉，最终决定用python来实现是因为考虑到之后的实验可能没有python完成起来比较困难，所以逼着自己对照着python的文档进行学习，但是本次实验仍有很多地方的实现我不是很满意，例如训练过程和预测过程的代码都只是针对二分类问题的，在此基础之上没有继续的进行封装，这是一次面向数据集、面向过程的实验。另外，根据最小风险与最小错误两者之间正确率差距不大的问题，我更改了一下风险系数，发现当其相差10个数量级时，才会对结果造成较大影响</p>
 <h3 id="part-two"><a href="#part-two" class="headerlink" title="part two"></a>part two</h3><p>给定汽车评价数据集，下载链接：<a href="http://archive.ics.uci.edu/ml/datasets/Car+Evaluation，利用贝叶斯算法进行数据分类操作，并统计其预测正确率。" target="_blank" rel="noopener">http://archive.ics.uci.edu/ml/datasets/Car+Evaluation，利用贝叶斯算法进行数据分类操作，并统计其预测正确率。</a></p>
 <p>（1）<strong>数据描述</strong></p>
@@ -370,9 +366,7 @@
 <p>利用10折交叉验证，对所设计的贝叶斯分类器进行性能评估，利用random库里的shuflle函数进行随机排列，将数据分为10块，枚举选择其中一块为检验数据，其余九块为训练数据进行训练，将得到的正确率相加取平均值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crossVal</span><span class="params">(data,n)</span>:</span></span><br><span class="line">    <span class="keyword">from</span> random <span class="keyword">import</span> shuffle</span><br><span class="line">    shuffle(data)</span><br><span class="line">    datasq=[]</span><br><span class="line">    sum=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        datasq.append([])</span><br><span class="line">    datanum=len(data)</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> range(datanum) :</span><br><span class="line">        datasq[d%n].append(data[d])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        traindata=[]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> i!=j:</span><br><span class="line">                traindata=traindata+datasq[j]</span><br><span class="line">        proxy,proy=train(traindata)</span><br><span class="line">        preres,res=calacc(proxy,proy,datasq[i])</span><br><span class="line">        sum+=res/n</span><br><span class="line">    print(<span class="string">"使用最小错误概率贝叶斯分类器的正确率为%.5f%%"</span>%float(sum))</span><br></pre></td></tr></table></figure>
 <p>得到的结果如下图，正确率为85%左右，还算比较成功</p>
-<p><img src="/Users/stayhome/Documents/大三上/机器学习/实验/navie-b/p2准确率.jpg" alt="p2准确率"></p>
 <p>在实验中，读入时出现如下问题</p>
-<p><img src="/Users/stayhome/Library/Application Support/typora-user-images/image-20191026185130007.png" alt="image-20191026185130007"></p>
 <p>最后的类别带一个’\n’，解决方法为先将所有的数据读入，然后每一个数据去掉最后一个’\n’，再进行分割</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(filename,<span class="string">'r'</span>) <span class="keyword">as</span> file:</span><br><span class="line">        temp=file.readlines()</span><br><span class="line">    data=[]</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> temp:</span><br><span class="line">        t=t[:<span class="number">-1</span>]</span><br><span class="line">        t=t.split(<span class="string">','</span>)</span><br><span class="line">        data.append(t)</span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
 <p>结果运行时发现最后一组数据没有’\n’，所以读入类别vgoo，显示报错，手动加了一个回车后答案正确，为此调试了很久很久。详细代码在naive_bayes2.py中。</p>
