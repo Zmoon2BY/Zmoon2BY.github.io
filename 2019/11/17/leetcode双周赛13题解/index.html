@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="leetcode,双周赛,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="5108. 加密数字给你一个非负整数 num ，返回它的「加密字符串」。 加密的过程是把一个整数用某个未知函数进行转化，你需要从下表推测出该转化函数 0 ———&amp;gt; “” 1 ———&amp;gt; “0” 2 ———&amp;gt; “1” balabala 一开始没想出来这个题咋做，后来自己找了一个规律先找到小于num的最大的${2^n-1}$然后把剩下的数表示成二进制串。 正解好像是num+1的二进制去">
+<meta name="keywords" content="leetcode,双周赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode双周赛13题解">
+<meta property="og:url" content="http://yoursite.com/2019/11/17/leetcode双周赛13题解/index.html">
+<meta property="og:site_name" content="我是胖头鱼">
+<meta property="og:description" content="5108. 加密数字给你一个非负整数 num ，返回它的「加密字符串」。 加密的过程是把一个整数用某个未知函数进行转化，你需要从下表推测出该转化函数 0 ———&amp;gt; “” 1 ———&amp;gt; “0” 2 ———&amp;gt; “1” balabala 一开始没想出来这个题咋做，后来自己找了一个规律先找到小于num的最大的${2^n-1}$然后把剩下的数表示成二进制串。 正解好像是num+1的二进制去">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-17T15:41:04.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode双周赛13题解">
+<meta name="twitter:description" content="5108. 加密数字给你一个非负整数 num ，返回它的「加密字符串」。 加密的过程是把一个整数用某个未知函数进行转化，你需要从下表推测出该转化函数 0 ———&amp;gt; “” 1 ———&amp;gt; “0” 2 ———&amp;gt; “1” balabala 一开始没想出来这个题咋做，后来自己找了一个规律先找到小于num的最大的${2^n-1}$然后把剩下的数表示成二进制串。 正解好像是num+1的二进制去">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/17/leetcode双周赛13题解/">
+
+
+
+
+
+  <title>leetcode双周赛13题解 | 我是胖头鱼</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我是胖头鱼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/17/leetcode双周赛13题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zpy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我是胖头鱼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcode双周赛13题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-17T23:04:44+08:00">
+                2019-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="5108-加密数字"><a href="#5108-加密数字" class="headerlink" title="5108. 加密数字"></a>5108. 加密数字</h3><p>给你一个非负整数 <code>num</code> ，返回它的「加密字符串」。</p>
+<p>加密的过程是把一个整数用某个未知函数进行转化，你需要从下表推测出该转化函数</p>
+<p>0 ———&gt; “”</p>
+<p>1 ———&gt; “0”</p>
+<p>2 ———&gt; “1”</p>
+<p>balabala</p>
+<p>一开始没想出来这个题咋做，后来自己找了一个规律先找到小于num的最大的${2^n-1}$然后把剩下的数表示成二进制串。</p>
+<p>正解好像是num+1的二进制去掉第一位</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">encode</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>,len=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">31</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num&gt;=(<span class="number">1</span>&lt;&lt;i)<span class="number">-1</span>)&#123;res=(<span class="number">1</span>&lt;&lt;i)<span class="number">-1</span>;len=i;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;len&lt;&lt;endl;</span></span><br><span class="line">        <span class="built_in">string</span> str=<span class="string">""</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">        <span class="keyword">int</span> temp = num-res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=len;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp&amp;<span class="number">1</span>)str+=<span class="string">'1'</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                str+=<span class="string">'0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            temp/=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        reverse(str.begin(),str.end());</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="5109-最小公共区域"><a href="#5109-最小公共区域" class="headerlink" title="5109. 最小公共区域"></a>5109. 最小公共区域</h3><p>给你一些区域列表 <code>regions</code> ，每个列表的第一个区域都包含这个列表内所有其他区域。</p>
+<p>很自然地，如果区域 <code>X</code> 包含区域 <code>Y</code> ，那么区域 <code>X</code> 比区域 <code>Y</code> 大。</p>
+<p>给定两个区域 <code>region1</code> 和 <code>region2</code> ，找到同时包含这两个区域的 <strong>最小</strong> 区域。</p>
+<p>如果区域列表中 <code>r1</code> 包含 <code>r2</code> 和 <code>r3</code> ，那么数据保证 <code>r2</code> 不会包含 <code>r3</code> 。</p>
+<p>数据同样保证最小公共区域一定存在。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">regions = [[&quot;Earth&quot;,&quot;North America&quot;,&quot;South America&quot;],</span><br><span class="line">[&quot;North America&quot;,&quot;United States&quot;,&quot;Canada&quot;],</span><br><span class="line">[&quot;United States&quot;,&quot;New York&quot;,&quot;Boston&quot;],</span><br><span class="line">[&quot;Canada&quot;,&quot;Ontario&quot;,&quot;Quebec&quot;],</span><br><span class="line">[&quot;South America&quot;,&quot;Brazil&quot;]],</span><br><span class="line">region1 = &quot;Quebec&quot;,</span><br><span class="line">region2 = &quot;New York&quot;</span><br><span class="line">输出：&quot;North America&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= regions.length &lt;= 10^4</code></li>
+<li><code>region1 != region2</code></li>
+<li>所有字符串只包含英文字母和空格，且最多只有 20 个字母。</li>
+</ul>
+<p>求一个给了一个有向无环图然后让你找LCA，问题难点在于看不懂题,数据范围一个一个跳就行。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; g[<span class="number">10000</span>+<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt; mp;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="built_in">string</span>&gt; mp1;</span><br><span class="line">    <span class="keyword">bool</span> vis[<span class="number">10000</span>+<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> tot=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">findSmallestRegion</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; regions, <span class="built_in">string</span> region1, <span class="built_in">string</span> region2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;regions.size();i++)&#123;</span><br><span class="line">            <span class="built_in">string</span> root =regions[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span>(mp.find(root)==mp.end())&#123;mp[root]=++tot;mp1[tot]=root;&#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;regions[i].size();j++)&#123;</span><br><span class="line">                <span class="built_in">string</span> son = regions[i][j];</span><br><span class="line">                <span class="keyword">if</span>(mp.find(son)==mp.end())&#123;mp[son]=++tot;mp1[tot]=son;&#125;</span><br><span class="line">                g[mp[son]].push_back(mp[root]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="keyword">int</span> s1=mp[region1],s2=mp[region2];</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">        que.push(s1);que.push(s2);</span><br><span class="line">        vis[s1]=<span class="literal">true</span>;vis[s2]=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!que.empty()&amp;&amp;ans==<span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> now=que.front();</span><br><span class="line">            que.pop();</span><br><span class="line">            <span class="comment">//vis[now]=true;</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;g[now].size();i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> u=g[now][i];</span><br><span class="line">                <span class="comment">//cout&lt;&lt;mp1[u]&lt;&lt;endl;</span></span><br><span class="line">                <span class="keyword">if</span>(vis[u])&#123;</span><br><span class="line">                    ans=u;</span><br><span class="line">                    <span class="comment">//cout&lt;&lt;ans&lt;&lt;endl;</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                vis[u]=<span class="literal">true</span>;</span><br><span class="line">                que.push(u);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;g[2].size()&lt;&lt;endl;</span></span><br><span class="line">        <span class="keyword">return</span> mp1[ans];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="5110-近义词句子"><a href="#5110-近义词句子" class="headerlink" title="5110. 近义词句子"></a>5110. 近义词句子</h3><p>给你一个近义词表 <code>synonyms</code> 和一个句子 <code>text</code> ， <code>synonyms</code> 表中是一些近义词对 ，你可以将句子 <code>text</code> 中每个单词用它的近义词来替换。</p>
+<p>请你找出所有用近义词替换后的句子，按 <strong>字典序排序</strong> 后返回。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">synonyms = [[&quot;happy&quot;,&quot;joy&quot;],[&quot;sad&quot;,&quot;sorrow&quot;],[&quot;joy&quot;,&quot;cheerful&quot;]],</span><br><span class="line">text = &quot;I am happy today but was sad yesterday&quot;</span><br><span class="line">输出：</span><br><span class="line">[&quot;I am cheerful today but was sad yesterday&quot;,</span><br><span class="line">&quot;I am cheerful today but was sorrow yesterday&quot;,</span><br><span class="line">&quot;I am happy today but was sad yesterday&quot;,</span><br><span class="line">&quot;I am happy today but was sorrow yesterday&quot;,</span><br><span class="line">&quot;I am joy today but was sad yesterday&quot;,</span><br><span class="line">&quot;I am joy today but was sorrow yesterday&quot;]</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= synonyms.length &lt;= 10</code></li>
+<li><code>synonyms[i].length == 2</code></li>
+<li><code>synonyms[0] != synonyms[1]</code></li>
+<li>所有单词仅包含英文字母，且长度最多为 <code>10</code> 。</li>
+<li><code>text</code> 最多包含 <code>10</code> 个单词，且单词间用单个空格分隔开。</li>
+</ul>
+<p>一开始看到这个数据范围，觉得随便做啊！</p>
+<p>然后发现自己不会写暴力，就去看第四题了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ans;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">bool</span>&gt; vis;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; generateSentences(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; synonyms, <span class="built_in">string</span> text) &#123;</span><br><span class="line">        ans.clear();</span><br><span class="line">        vis.clear();</span><br><span class="line">        vis[text] = <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        ans.push_back(text);</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(cur &lt; ans.size())&#123;</span><br><span class="line">            <span class="built_in">string</span> t = ans[cur];</span><br><span class="line">            <span class="keyword">int</span> l = t.length();</span><br><span class="line">            <span class="comment">//cout&lt;&lt;"#"&lt;&lt;t&lt;&lt;endl;</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; v: synonyms)&#123;</span><br><span class="line">                <span class="keyword">int</span> l0 = v[<span class="number">0</span>].length(), l1 = v[<span class="number">1</span>].length(), prev, now;</span><br><span class="line">                <span class="comment">//cout&lt;&lt;t&lt;&lt;" "&lt;&lt;v[0]&lt;&lt;" "&lt;&lt;v[1]&lt;&lt;endl;</span></span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">                prev = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span>((now = t.find(v[<span class="number">0</span>], prev)) != <span class="number">-1</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span> ((now == <span class="number">0</span> || t[now - <span class="number">1</span>] == <span class="string">' '</span>) &amp;&amp; (now + l0 &gt;= l || t[now + l0] == <span class="string">' '</span>)) &#123;</span><br><span class="line">                        <span class="built_in">string</span> nt = t;</span><br><span class="line">                        nt.replace(now, l0, v[<span class="number">1</span>]);</span><br><span class="line">                        <span class="comment">//cout&lt;&lt;nt&lt;&lt;endl;</span></span><br><span class="line">                        <span class="keyword">if</span> (vis[nt] == <span class="literal">false</span>)&#123;</span><br><span class="line">                            vis[nt] = <span class="literal">true</span>;</span><br><span class="line">                            ans.push_back(nt);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    prev = now + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                prev = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span>((now = t.find(v[<span class="number">1</span>], prev)) != <span class="number">-1</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span> ((now == <span class="number">0</span> || t[now - <span class="number">1</span>] == <span class="string">' '</span>) &amp;&amp; (now + l1 &gt;= l || t[now + l1] == <span class="string">' '</span>)) &#123;</span><br><span class="line">                        <span class="built_in">string</span> nt = t;</span><br><span class="line">                        nt.replace(now, l1, v[<span class="number">0</span>]);</span><br><span class="line">                        <span class="comment">//cout&lt;&lt;nt&lt;&lt;endl;</span></span><br><span class="line">                        <span class="keyword">if</span> (vis[nt] == <span class="literal">false</span>)&#123;</span><br><span class="line">                            vis[nt] = <span class="literal">true</span>;</span><br><span class="line">                            ans.push_back(nt);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    prev = now + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            ++cur;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        sort(ans.begin(), ans.end());</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="5125-不相交的握手"><a href="#5125-不相交的握手" class="headerlink" title="5125. 不相交的握手"></a>5125. 不相交的握手</h3><p><strong>偶数</strong> 个人站成一个圆，总人数为 <code>num_people</code> 。每个人与除自己外的一个人握手，所以总共会有 <code>num_people / 2</code> 次握手。</p>
+<p>将握手的人之间连线，请你返回连线不会相交的握手方案数。</p>
+<p>由于结果可能会很大，请你返回答案 <strong>模</strong> <strong><code>10^9+7</code></strong> 后的结果。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：num_people = 2</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p>Emmmm,卡特兰数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> CatalanNum[<span class="number">1010</span>];</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> inv[<span class="number">1010</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Catalan</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> mod)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=n+<span class="number">1</span>; i++)&#123;</span><br><span class="line">            inv[i] = (mod - mod / i) * inv[mod % i] % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        CatalanNum[<span class="number">0</span>] = CatalanNum[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=n; i++)</span><br><span class="line">            CatalanNum[i] = CatalanNum[i<span class="number">-1</span>] * (<span class="number">4</span> * i - <span class="number">2</span>) %mod * inv[i+<span class="number">1</span>] %mod;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfWays</span><span class="params">(<span class="keyword">int</span> num_people)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n =num_people/<span class="number">2</span>;</span><br><span class="line">        Catalan(n+<span class="number">1</span>,<span class="number">1000000000</span>+<span class="number">7</span>);</span><br><span class="line">        <span class="keyword">return</span> CatalanNum[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>本应该是最难的一题，但是我知道结论。</p>
+<p>又是一次失败的双周赛</p>
+<p>排名国内73/810 全球291/2771 真是菜啊。什么时候才能进前50呢？</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+            <a href="/tags/双周赛/" rel="tag"># 双周赛</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/10/leetcode周赛162题解/" rel="next" title="leetcode周赛162题解">
+                <i class="fa fa-chevron-left"></i> leetcode周赛162题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zpy</p>
+              <p class="site-description motion-element" itemprop="description">当时只道是寻常</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zpy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

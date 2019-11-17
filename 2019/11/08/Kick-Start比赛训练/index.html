@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="我是胖头鱼">
 <meta property="og:description" content="第一次用Kick Start的做题界面写题 感觉外观做的相当美观 高亮友好，跟牛客网的黑色背景相比背景深蓝让我觉得很舒服">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-08T03:25:13.338Z">
+<meta property="og:updated_time" content="2019-11-16T14:24:35.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kick Start比赛训练">
 <meta name="twitter:description" content="第一次用Kick Start的做题界面写题 感觉外观做的相当美观 高亮友好，跟牛客网的黑色背景相比背景深蓝让我觉得很舒服">
@@ -317,6 +317,7 @@
 <p>题意大概就是给一个t组数据，每组(a,b]区间，给你n次机会询问，每次返回大了还是小了或者对了，二分就行</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,mid,ans;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">string</span> judge;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            mid=(a+b)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;mid&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;judge;</span><br><span class="line">            <span class="keyword">if</span>(judge==<span class="string">"CORRECT"</span>)&#123;</span><br><span class="line">                ans=mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(judge==<span class="string">"TOO_SMALL"</span>)&#123;</span><br><span class="line">                a=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(judge==<span class="string">"TOO_BIG"</span>)&#123;</span><br><span class="line">                b=mid<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>不过值得一提的是，这个比赛貌似是要下载数据然后本地运行之后把结果提交，好奇这样应该怎么搞啊，比赛遇到了岂不完蛋。</p>
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>看了一集kuangbin的演示视频，可以直接提交程序但是不显示大数据集是否通过，只显示小数据是否通过</p>
 
       
     </div>
@@ -427,7 +428,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
