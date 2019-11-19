@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="模版,ACM,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="动态规划 矩阵快速幂 区间dp 状压dp  问题引入${F0}=0$${F_1}=1$${F_n}={F{n-1}}+{F_{n-2}}$$n\leq10^{16}$求第n项对$10^{4}$取模的结果 对于该问题，n的范围比较大，线性递推稳TLE所以采用矩阵乘加速递推过程$\begin{pmatrix} F{n}\F{n-1} \end{pmatrix}= \begin{pmatrix} 1&amp;a">
+<meta name="keywords" content="模版,ACM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划入门">
+<meta property="og:url" content="http://yoursite.com/2019/11/19/动态规划入门/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="动态规划 矩阵快速幂 区间dp 状压dp  问题引入${F0}=0$${F_1}=1$${F_n}={F{n-1}}+{F_{n-2}}$$n\leq10^{16}$求第n项对$10^{4}$取模的结果 对于该问题，n的范围比较大，线性递推稳TLE所以采用矩阵乘加速递推过程$\begin{pmatrix} F{n}\F{n-1} \end{pmatrix}= \begin{pmatrix} 1&amp;a">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rfe11g9j30nx0blabu.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rhtoromj30h606j3zb.jpg">
+<meta property="og:updated_time" content="2019-11-19T15:27:17.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态规划入门">
+<meta name="twitter:description" content="动态规划 矩阵快速幂 区间dp 状压dp  问题引入${F0}=0$${F_1}=1$${F_n}={F{n-1}}+{F_{n-2}}$$n\leq10^{16}$求第n项对$10^{4}$取模的结果 对于该问题，n的范围比较大，线性递推稳TLE所以采用矩阵乘加速递推过程$\begin{pmatrix} F{n}\F{n-1} \end{pmatrix}= \begin{pmatrix} 1&amp;a">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rfe11g9j30nx0blabu.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/19/动态规划入门/">
+
+
+
+
+
+  <title>动态规划入门 | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/动态规划入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">动态规划入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-19T23:17:35+08:00">
+                2019-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><ul>
+<li>矩阵快速幂</li>
+<li>区间dp</li>
+<li>状压dp</li>
+</ul>
+<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>${F<em>0}=0$<br>${F_1}=1$<br>${F_n}={F</em>{n-1}}+{F_{n-2}}$<br>$n\leq10^{16}$<br>求第n项对$10^{4}$取模的结果</p>
+<p>对于该问题，n的范围比较大，线性递推稳TLE<br>所以采用矩阵乘加速递推过程<br>$\begin{pmatrix} F<em>{n}\F</em>{n-1} \end{pmatrix}= \begin{pmatrix} 1&amp;1\1&amp;0 \end{pmatrix} \times\begin{pmatrix} F<em>{n-1}\F</em>{n-2} \end{pmatrix} =\begin{pmatrix} 1&amp;1\1&amp;0 \end{pmatrix}^n \times\begin{pmatrix} F<em>{1}\F</em>{0} \end{pmatrix}\quad$</p>
+<h2 id="poj-3734"><a href="#poj-3734" class="headerlink" title="poj 3734"></a>poj 3734</h2><p>题意：你有一排砖,你想给这一排砖中的每一块涂上红,蓝,绿,黄中4种颜色中的其中1种,也就是说每一块砖只能涂1种颜色.现在一排有N块砖,问你有多少种方案,让红色和绿色的砖的块数为偶数.答案mod10007<br>输入:第一行为T,代表数据组数.(1&lt;=T&lt;=100),接下来T行每行包括一个数字N,代表有N(1&lt;=N&lt;=10^9)块砖.</p>
+<p>设染到第$i$块时，红绿都为偶数的方案数为$a_i$，红绿恰有一个为偶数的方案数为$b_i$，都为奇数的方案数为$c_i$<br>则有如下递推式：</p>
+<script type="math/tex; mode=display">a_{i+1}=2\times{a_i}+b_{i}</script><script type="math/tex; mode=display">b_{i+1}=2\times{a_i}+2\times{b_i}+2\times{c_i}</script><script type="math/tex; mode=display">c_{i+1}=b_i+2\times{c_i}</script><p>$\begin{pmatrix} a<em>{n}\b</em>{n}\c<em>{n} \end{pmatrix}= \begin{pmatrix} 2&amp;1&amp;0\2&amp;2&amp;2\0&amp;1&amp;2 \end{pmatrix} \times\begin{pmatrix} a</em>{n-1}\b<em>{n-1}\c</em>{n-1} \end{pmatrix} =\begin{pmatrix} 2&amp;1&amp;0\2&amp;2&amp;2\0&amp;1&amp;2 \end{pmatrix}^n \times\begin{pmatrix} a<em>{0}\b</em>{0}\c_{0} \end{pmatrix}\quad$</p>
+<p>推出矩阵之后套模版即可</p>
+<h2 id="然后再看一下牛客多校训练的一道题"><a href="#然后再看一下牛客多校训练的一道题" class="headerlink" title="然后再看一下牛客多校训练的一道题"></a>然后再看一下牛客多校训练的一道题</h2><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rfe11g9j30nx0blabu.jpg" alt="100%"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = s.length()<span class="number">-1</span>; i&gt;=<span class="number">0</span>; --i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i]-<span class="string">'0'</span>)&#123;</span><br><span class="line">           matrix t = qpow(A,s[i]-<span class="string">'0'</span>);</span><br><span class="line">           B = t*B;</span><br><span class="line">        &#125;</span><br><span class="line">        A = qpow(A,<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>就是一个十进制的矩阵快速幂</p>
+<h1 id="区间dp"><a href="#区间dp" class="headerlink" title="区间dp"></a>区间dp</h1><p>区间dp，顾名思义，就是解决一些区间内最优值的问题，通常的时间复杂度为$n^2$ 或者 $n^3$<br>大致思路</p>
+<ul>
+<li>首先确定状态</li>
+<li>初始化dp数组</li>
+<li>枚举区间长度—&gt;枚举起点—&gt;枚举间断点</li>
+<li>小区间转移至大区间</li>
+</ul>
+<p>贴一下常见的模版</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">1</span>;len&lt;=n;len++)&#123;<span class="comment">//枚举区间长度</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j+len&lt;=n+<span class="number">1</span>;j++)&#123;<span class="comment">//枚举起点，ends&lt;=n</span></span><br><span class="line">        <span class="keyword">int</span> e = j+len - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = j;i&lt;e;i++)&#123;<span class="comment">//枚举分割点，更新小区间最优解</span></span><br><span class="line">  dp[j][e] = min(dp[j][e],dp[j][i]+dp[i+<span class="number">1</span>][e]+something);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>NOI1995 石子合并</p>
+<p>在一个圆形操场的四周摆放N堆石子,现要将石子有次序地合并成一堆.规定每次只能选相邻的2堆合并成新的一堆，并将新的一堆的石子数，记为该次合并的得分。</p>
+<p>试设计出1个算法,计算出将N堆石子合并成1堆的最小得分。</p>
+<p>可以考虑如何解决石子排成一排而不是一个环<br>那么，dp转移方程很容易构造出来</p>
+<script type="math/tex; mode=display">dp(l,r)=min(dp(l,r),dp(l,k)+dp(k+1,r)+W(l,r))</script><p>对于环，该如何解决？</p>
+<p>环状以后合并区间的情况就可以从后往前合并，最后合并完可能1～n、2～n～1、3～n～2等n种情况<br>所以破环成链，将1～n-1搬到n的后面，套之前的dp过程，枚举最终结果的最小值即可</p>
+<p>Poj2955 括号匹配</p>
+<p>题意：给出一个的只有’(‘,’)’,’[‘,’]’四种括号组成的字符串，求 最多 有多少个括号满足题目里所描述的完全匹配</p>
+<p>如果s[i]与s[j]匹配，那么明显的dp[i][j] = dp[i+1][j-1]+2;然后在这个基础上枚举分割点k.<br>if(s[i] 与 s[j]匹配） dp[i][j] = d[[i+1][j-1] +2;</p>
+<p>dp[i][j] = max(dp[i][j],dp[i][k]+dp[k+1][j]);</p>
+<p>贴代码</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rhtoromj30h606j3zb.jpg" alt="200%"></p>
+<h2 id="时间优化"><a href="#时间优化" class="headerlink" title="时间优化"></a>时间优化</h2><p>四边形不等式优化<br>$n^3-&gt;n^2$<br>如果对于任意的${a1}\leq{a2}\leq{b1}\leq{b2}$，有函数$m(i,j)$满足以下条件</p>
+<script type="math/tex; mode=display">m(a1,b1)+m(a2,b2)\leq{m(a1,b2)}+m(a2,b1)</script><p>那么$m(i,j)$满足四边形不等式。</p>
+<p>定义$s(i,j)$为函数$m(i,j)$对应的使得$m(i,j)$取得最小值的k值。<br>我们可以证明，$s(i,j-1)\leq{s(i,j)}\leq{s(i+1,j)}$<br>那么改变状态转移方程为：<br>$m(i,j)=min(m(i,j),m(i,k)+m(k,j))$<br>$(s(i,j-1)\leq{k}\leq{s(i+1,j)})$</p>
+<p>设mk[i,j]=m[i,k]+m[k,j]，s[i,j]=d<br>对于任意k&lt;d，有mk[i,j]≥md[i,j]（这里以m[i,j]=min{m[i,k]+m[k,j]}为例,max的类似），接下来只要证明mk[i+1,j]≥md[i+1,j]，那么只有当s[i+1,j]≥s[i,j]时才有可能有mk[i+1,j]≥md[i+1,j]<br>(mk[i+1,j]-md[i+1,j])-(mk[i,j]-md[i,j])<br>=(mk[i+1,j]+md[i,j])-(md[i+1,j]+mk[i,j])<br>=(m[i+1,k]+m[k,j]+m[i,d]+m[d,j])-(m[i+1,d]+m[d,j]+m[i,k]+m[k,j])<br>=(m[i+1,k]+m[i,d])-(m[i+1,d]+m[i,k])<br>∵m满足四边形不等式，∴对于i&lt;i+1≤k&lt;d有m[i+1,k]+m[i,d]≥m[i+1,d]+m[i,k]<br>∴(mk[i+1,j]-md[i+1,j])≥(mk[i,j]-md[i,j])≥0<br>∴s[i,j]≤s[i+1,j]，同理可证s[i,j-1]≤s[i,j]<br> <strong>摘自百度百科，就是在凑四边形不等式</strong></p>
+<p>对于固定的区间长度len，有</p>
+<p>　　m[i][i+len]的决策范围为s[i][i+len-1]至s[i+1][i+len]</p>
+<p>　　m[i+1][i+len+1]的决策范围为s[i+1][i+len]至s[i+2][i+len+1]</p>
+<p>　　m[i+2][i+len+2]的决策范围为s[i+2][i+len+1]至s[i+3][i+len+2]<br>  So 时间复杂度$O_{(n^2)}$</p>
+<h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><p>某一村庄在一条路线上安装了n盏路灯，每盏灯的功率有大有小（即同一段时间内消耗的电量有多有少）。老张就住在这条路中间某一路灯旁，他有一项工作就是每天早上天亮时一盏一盏地关掉这些路灯。</p>
+<p>为了给村里节省电费，老张记录下了每盏路灯的位置和功率，他每次关灯时也都是尽快地去关，但是老张不知道怎样去关灯才能够最节省电。他每天都是在天亮时首先关掉自己所处位置的路灯，然后可以向左也可以向右去关灯。开始他以为先算一下左边路灯的总功率再算一下右边路灯的总功率，然后选择先关掉功率大的一边，再回过头来关掉另一边的路灯，而事实并非如此，因为在关的过程中适当地调头有可能会更省一些。</p>
+<p>现在已知老张走的速度为1m/s，每个路灯的位置（是一个整数，即距路线起点的距离，单位：m）、功率（W），老张关灯所用的时间很短而可以忽略不计。</p>
+<hr>
+<p>输入格式</p>
+<p>文件第一行是两个数字n(1&lt;=n&lt;=50，表示路灯的总数)和c(1&lt;＝c&lt;=n老张所处位置的路灯号)；</p>
+<p>接下来n行，每行两个数据，表示第1盏到第n盏路灯的位置和功率。数据保证路灯位置单调递增。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dp[c][c][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">dp[c][c][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i+len<span class="number">-1</span>&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> j=i+len<span class="number">-1</span>;</span><br><span class="line">dp[i][j][<span class="number">0</span>]=min(dp[i+<span class="number">1</span>][j][<span class="number">0</span>]+(a[i+<span class="number">1</span>]-a[i])*(p[n]-p[j]+p[i]),dp[i+<span class="number">1</span>][j][<span class="number">1</span>]+(a[j]-a[i])*(p[n]-p[j]+p[i]));</span><br><span class="line">dp[i][j][<span class="number">1</span>]=min(dp[i][j<span class="number">-1</span>][<span class="number">1</span>]+(a[j]-a[j<span class="number">-1</span>])*(p[n]-p[j<span class="number">-1</span>]+p[i<span class="number">-1</span>]),dp[i][j<span class="number">-1</span>][<span class="number">0</span>]+(a[j]-a[i])*(p[n]-p[j<span class="number">-1</span>]+p[i<span class="number">-1</span>]));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="状压DP"><a href="#状压DP" class="headerlink" title="状压DP"></a>状压DP</h2><p>所谓状态压缩，一般是通过用01串表示状态，充分利用二进制数的特性，简化计算难度。举个例子，在棋盘上摆放棋子的题目中，我们可以用1表示当前位置摆放棋子，用0表示当前位置不摆放棋子。</p>
+<p>这样的话，就能够直接运用许多二进制运算的特性来实现对时间和空间的优化</p>
+<p>POJ 3254<br>农夫有一块地，被划分为m行n列大小相等的格子，其中一些格子是可以放牧的（用1标记），农夫可以在这些格子里放牛，其他格子则不能放牛（用0标记），并且要求不可以使相邻格子都有牛。现在输入数据给出这块地的大小及可否放牧的情况，求该农夫有多少种放牧方案可以选择，m和n都小于等于12<br>input<br>2 3<br>1 1 1<br>0 1 0<br>output<br>9</p>
+<p>以dp[i][j]来表示对于前i行，第i行采用第j种状态时可以得到的可行方案总数<br>dp[i][j]=$\sum$dp[i-1][x] x为可行状态的编号</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模版/" rel="tag"># 模版</a>
+          
+            <a href="/tags/ACM/" rel="tag"># ACM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/19/小zhai的锻炼挑战/" rel="next" title="小zhai的锻炼挑战">
+                <i class="fa fa-chevron-left"></i> 小zhai的锻炼挑战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">当时只道是寻常</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
