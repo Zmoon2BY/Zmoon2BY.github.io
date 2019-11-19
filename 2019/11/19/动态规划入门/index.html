@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rfe11g9j30nx0blabu.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g93rhtoromj30h606j3zb.jpg">
-<meta property="og:updated_time" content="2019-11-19T15:27:17.601Z">
+<meta property="og:updated_time" content="2019-11-19T15:32:08.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划入门">
 <meta name="twitter:description" content="动态规划 矩阵快速幂 区间dp 状压dp  问题引入${F0}=0$${F_1}=1$${F_n}={F{n-1}}+{F_{n-2}}$$n\leq10^{16}$求第n项对$10^{4}$取模的结果 对于该问题，n的范围比较大，线性递推稳TLE所以采用矩阵乘加速递推过程$\begin{pmatrix} F{n}\F{n-1} \end{pmatrix}= \begin{pmatrix} 1&amp;a">
@@ -758,6 +758,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
