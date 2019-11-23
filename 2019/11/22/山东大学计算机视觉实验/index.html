@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学期作业,计算机视觉,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python + opencv 计算机视觉实验/数字图像处理实验本文为山东大学2019-2020学年秋季学期计算机视觉 or 数字图像处理课程的实验 我采用的是python + opencv貌似实验要求采用C++ or Matlab 但是python和opencv好配置啊，一键安装 1pip install opencv-python 贴一个opencv的官网https://opencv.org">
+<meta name="keywords" content="学期作业,计算机视觉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="山东大学计算机视觉实验">
+<meta property="og:url" content="http://yoursite.com/2019/11/22/山东大学计算机视觉实验/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="python + opencv 计算机视觉实验/数字图像处理实验本文为山东大学2019-2020学年秋季学期计算机视觉 or 数字图像处理课程的实验 我采用的是python + opencv貌似实验要求采用C++ or Matlab 但是python和opencv好配置啊，一键安装 1pip install opencv-python 贴一个opencv的官网https://opencv.org">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g96uramnvdj30ms0g2tbt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g96vpmf08mj308b01odfp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vh2p0t9j302d00la9t.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vhgy8hgj300c00l0ad.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vhrt9boj300c00l0ad.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vi5an3fj30ax013t8k.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vipurzfj302a00q0sh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vik6f7qj301n00l0of.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vix9ocmj300s00l0gw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vj4sy2cj300y00l0ja.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vk7op6zj30b703wwe9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vkrf57lj304n01baa2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g97vxufw74j30o10ul75d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g97w25xvpzj30hs0cujs3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6gy1g980sjaqadj30hs0es414.jpg">
+<meta property="og:updated_time" content="2019-11-23T07:52:29.319Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="山东大学计算机视觉实验">
+<meta name="twitter:description" content="python + opencv 计算机视觉实验/数字图像处理实验本文为山东大学2019-2020学年秋季学期计算机视觉 or 数字图像处理课程的实验 我采用的是python + opencv貌似实验要求采用C++ or Matlab 但是python和opencv好配置啊，一键安装 1pip install opencv-python 贴一个opencv的官网https://opencv.org">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g96uramnvdj30ms0g2tbt.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/22/山东大学计算机视觉实验/">
+
+
+
+
+
+  <title>山东大学计算机视觉实验 | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/22/山东大学计算机视觉实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">山东大学计算机视觉实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-22T14:55:32+08:00">
+                2019-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="python-opencv-计算机视觉实验-数字图像处理实验"><a href="#python-opencv-计算机视觉实验-数字图像处理实验" class="headerlink" title="python + opencv 计算机视觉实验/数字图像处理实验"></a>python + opencv 计算机视觉实验/数字图像处理实验</h2><p>本文为山东大学2019-2020学年秋季学期计算机视觉 or 数字图像处理课程的实验</p>
+<p>我采用的是python + opencv<del>貌似实验要求采用C++ or Matlab</del></p>
+<p>但是python和opencv好配置啊，一键安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
+<p>贴一个opencv的官网<a href="https://opencv.org" target="_blank" rel="noopener">https://opencv.org</a></p>
+<p>以及opencv-python官方文档<a href="https://docs.opencv.org/4.1.1/d6/d00/tutorial_py_root.html非常强烈推荐反复研读" target="_blank" rel="noopener">https://docs.opencv.org/4.1.1/d6/d00/tutorial_py_root.html非常强烈推荐反复研读</a></p>
+<h3 id="实验1-图像加载、显示"><a href="#实验1-图像加载、显示" class="headerlink" title="实验1 图像加载、显示"></a>实验1 图像加载、显示</h3><p><strong>实验1-1：图像显示</strong></p>
+<p>实验要求：</p>
+<p>1）利用图像库的功能，实现从文件加载图像，并在窗口中进行显示的功能；</p>
+<p>2）利用常见的图像文件格式（.jpg； .png； .bmp； .gif）进行测试。</p>
+<p>实验1-2：图像合成</p>
+<p><strong>实验要求：</strong></p>
+<p>1）现有一张4通道透明图像a.png:</p>
+<p>2）从其中提取出alpha通道并显示;</p>
+<p>3）用alpha混合，为a.png替换一张新的背景（bg.png）。</p>
+<p>1-1 根据官方使用文档操作一下就可以了</p>
+<p>1-2 </p>
+<p>官方文档里这样说：</p>
+<blockquote>
+<h2 id="Using-OpenCV"><a href="#Using-OpenCV" class="headerlink" title="Using OpenCV"></a>Using OpenCV</h2><h3 id="Read-an-image"><a href="#Read-an-image" class="headerlink" title="Read an image"></a>Read an image</h3><p>Use the function <strong><a href="https://docs.opencv.org/4.1.1/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56" target="_blank" rel="noopener">cv.imread()</a></strong> to read an image. The image should be in the working directory or a full path of image should be given.</p>
+<p>Second argument is a flag which specifies the way image should be read.</p>
+<ul>
+<li><a href="https://docs.opencv.org/4.1.1/d4/da8/group__imgcodecs.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822" target="_blank" rel="noopener">cv.IMREAD_COLOR</a> : Loads a color image. Any transparency of image will be neglected. It is the default flag.</li>
+<li><a href="https://docs.opencv.org/4.1.1/d4/da8/group__imgcodecs.html#gga61d9b0126a3e57d9277ac48327799c80ae29981cfc153d3b0cef5c0daeedd2125" target="_blank" rel="noopener">cv.IMREAD_GRAYSCALE</a> : Loads image in grayscale mode</li>
+<li><p><a href="https://docs.opencv.org/4.1.1/d4/da8/group__imgcodecs.html#gga61d9b0126a3e57d9277ac48327799c80aeddd67043ed0df14f9d9a4e66d2b0708" target="_blank" rel="noopener">cv.IMREAD_UNCHANGED</a> : Loads image as such including alpha channel</p>
+</li>
+<li><p>Note</p>
+<p>Instead of these three flags, you can simply pass integers 1, 0 or -1 respectively.</p>
+</li>
+</ul>
+<p>See the code below: </p>
+<p>import numpy as np</p>
+<p>import cv2 as cv</p>
+<p># Load an color image in grayscale</p>
+<p>img = <a href="https://docs.opencv.org/4.1.1/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56" target="_blank" rel="noopener">cv.imread</a>(‘messi5.jpg’,0)</p>
+</blockquote>
+<p>实验要求获得alpha通道，图片一般只有三维RGB，某些还有透明度这一维即alpha通道，所以读入图片时采用-1作为参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = cv2.imread(<span class="string">"a.png"</span>,<span class="number">-1</span>)</span><br><span class="line">mask = a[:,:,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>mask就是alpha通道了，可以保存一下看看效果如何</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mask=cv2.imread(<span class="string">"alpha.png"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g96uramnvdj30ms0g2tbt.jpg" style="zoom:50%;"></p>
+<p>之后把背景读进来，根据alpha通道的值把两张图片合成，全部的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Tue Oct 29 15:18:42 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: stayhome</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = cv2.imread(<span class="string">"a.png"</span>,<span class="number">-1</span>)</span><br><span class="line">mask = a[:,:,<span class="number">3</span>] <span class="comment">#注意这时候是一维的，单单一个alpha通道，保存时会按照三维RGB去保存</span></span><br><span class="line">cv2.imwrite(<span class="string">'alpha.png'</span>,mask)</span><br><span class="line">mask=cv2.imread(<span class="string">"alpha.png"</span>)</span><br><span class="line">bg = cv2.imread(<span class="string">"bg.png"</span>)</span><br><span class="line">fore = cv2.imread(<span class="string">"a.png"</span>)</span><br><span class="line"></span><br><span class="line">alpha = mask</span><br><span class="line">alpha=alpha.astype(float)/<span class="number">255</span></span><br><span class="line">fore=fore.astype(float)</span><br><span class="line">bg=bg.astype(float)</span><br><span class="line">fore=cv2.multiply(fore,alpha)</span><br><span class="line">bg=cv2.multiply(bg,<span class="number">1.0</span>-alpha)</span><br><span class="line">new=cv2.add(fore,bg)</span><br><span class="line">cv2.imwrite(<span class="string">'new.png'</span>,new)</span><br></pre></td></tr></table></figure>
+<p>中间需要注意一下，mask第二次载入的时候是一个三维通道的图片，运算方便一些，每一维的值都是alpha通道的值</p>
+<h3 id="实验2-图像滤波处理"><a href="#实验2-图像滤波处理" class="headerlink" title="实验2 图像滤波处理"></a>实验2 图像滤波处理</h3><p>2-1：实现图像的高斯滤波处理</p>
+<p><strong>实验要求：</strong></p>
+<p>1）通过调整高斯函数的标准差(sigma)来控制平滑程度；</p>
+<p>给定函数：void Gaussian(const MyImage &amp;input, MyImage &amp;output, double sigma);</p>
+<p>2）滤波窗口大小取为[6 <em> sigma-1]/2 </em> 2+1，[.]表示取整；</p>
+<p>3）利用二维高斯函数的行列可分离性进行加速；</p>
+<ul>
+<li><p>先对每行进行一维高斯滤波，再对结果的每列进行同样的一维高斯滤波；</p>
+</li>
+<li><p>空间滤波=图像卷积；</p>
+</li>
+<li><p>高斯滤波=以高斯函数为卷积核的图像卷积。</p>
+</li>
+</ul>
+<p>首先，要搞明白卷积是个什么东西，百度百科给出定义</p>
+<blockquote>
+<p>在泛函分析中，卷积、旋积或摺积(英语：Convolution)是通过两个函数f 和g 生成第三个函数的一种数学算子，表征函数f 与g经过翻转和平移的重叠部分函数值乘积对重叠长度的积分。</p>
+</blockquote>
+<p>很难懂，大概就是如果扔两个骰子，问得到点数为6的概率，会有这样的函数P[6] = ${\sum}$p[i]*p[6-i] 其中6-i + i 是个定值6</p>
+<p>一般来说，图像卷积的时候把卷积核旋转180度即可，但是高斯核是对称的所以翻不翻转无所谓（建议跟助教同学讲清楚，如果为了防止他故意刁难可以翻转一下）</p>
+<p>然后我滤波的过程比较蠢，先横着滤波一遍，把结果存在一个temp图里，然后对temp图再竖着滤波一遍</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Wed Oct 30 22:21:55 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: stayhome</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Gaussfilter</span><span class="params">(inputimage,sigma)</span>:</span></span><br><span class="line">    Size = int( <span class="number">6</span> * sigma - <span class="number">1</span>) // <span class="number">2</span> * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">    height , width , channel = inputimage.shape</span><br><span class="line">    matrix = np.zeros( (Size,<span class="number">1</span>) )</span><br><span class="line">    Sum = <span class="number">0</span></span><br><span class="line">    origin = Size//<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(Size) :</span><br><span class="line">        temp = np.exp(<span class="number">-0.5</span> * ((i - origin) *(i - origin )) / (sigma ** <span class="number">2</span>))*<span class="number">100</span></span><br><span class="line">        matrix[i][<span class="number">0</span>] = temp</span><br><span class="line">        Sum = Sum + temp</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(Size) : <span class="comment">#归一化处理</span></span><br><span class="line">        matrix[i][<span class="number">0</span>] = matrix[i][<span class="number">0</span>] / Sum</span><br><span class="line">    src = inputimage</span><br><span class="line">    new = np.zeros((height,width,channel))</span><br><span class="line">    temp = np.zeros((height,width,channel))</span><br><span class="line">    border = Size//<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(height):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(width):</span><br><span class="line">            Sum=np.zeros((<span class="number">3</span>))</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(-border,border+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> (j+k) &gt;= width <span class="keyword">or</span> j+k &lt;<span class="number">0</span>: </span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                Sum[<span class="number">0</span>]=Sum[<span class="number">0</span>]+src[i][j+k][<span class="number">0</span>]*matrix[k+border]</span><br><span class="line">                Sum[<span class="number">1</span>]=Sum[<span class="number">1</span>]+src[i][j+k][<span class="number">1</span>]*matrix[k+border]</span><br><span class="line">                Sum[<span class="number">2</span>]=Sum[<span class="number">2</span>]+src[i][j+k][<span class="number">2</span>]*matrix[k+border]</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> range(channel):</span><br><span class="line">                <span class="keyword">if</span> Sum[c] &lt; <span class="number">0</span> :</span><br><span class="line">                    Sum[c] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">if</span> Sum[c] &gt; <span class="number">255</span> :</span><br><span class="line">                    Sum[c] = <span class="number">255</span></span><br><span class="line">            temp[i][j]=Sum</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(height):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(width):</span><br><span class="line">            Sum=np.zeros((<span class="number">3</span>))</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(-border,border+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i+k &gt;= height <span class="keyword">or</span> i+k &lt;<span class="number">0</span>: </span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                Sum[<span class="number">0</span>]=Sum[<span class="number">0</span>]+temp[i+k][j][<span class="number">0</span>]*matrix[k+border]</span><br><span class="line">                Sum[<span class="number">1</span>]=Sum[<span class="number">1</span>]+temp[i+k][j][<span class="number">1</span>]*matrix[k+border]</span><br><span class="line">                Sum[<span class="number">2</span>]=Sum[<span class="number">2</span>]+temp[i+k][j][<span class="number">2</span>]*matrix[k+border]</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(channel):</span><br><span class="line">                <span class="keyword">if</span> Sum[k] &lt; <span class="number">0</span> :</span><br><span class="line">                    Sum[k] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">if</span> Sum[k] &gt; <span class="number">255</span> :</span><br><span class="line">                    Sum[k] = <span class="number">255</span></span><br><span class="line">            new[i][j]=Sum</span><br><span class="line">    <span class="keyword">return</span> new</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">"a.jpg"</span>)</span><br><span class="line">new = Gaussfilter(img,<span class="number">1</span>)</span><br><span class="line">cv.imwrite(<span class="string">"2_1new.jpg"</span>,new)</span><br></pre></td></tr></table></figure>
+<p>效果就不贴了，可以选择不同的sigma尝试一下</p>
+<p>2-2：实现图像的联合双边滤波处理</p>
+<p><strong>实验要求：</strong></p>
+<p>给定函数：function  im = jbf(D,C,w, sigma_f, sigma_g)</p>
+<p>其中：D为输入图像；C为引导图像；W为滤波窗口大小；</p>
+<p>sigma_f 为spatial kernel标准差；</p>
+<p>sigma_g为range kernel 标准差；</p>
+<p>给定公式：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g96vpmf08mj308b01odfp.jpg" alt></p>
+<p>其中：p是q的邻域中的一个像素。 f和g是空间和距离内核，通常以高斯的形式表示，<em>I</em>是输入图像。</p>
+<p><del>个人觉得p和q说反了，应该是q是p的邻域内的一个像素</del></p>
+<ul>
+<li>f 是空间滤波器内核，定义为：exp([-d_f^2]/[2*sigma_f^2])</li>
+</ul>
+<p>其中：d_f 为输入图像的像素位置差，sigma_f为空间滤波核函数的标准差</p>
+<ul>
+<li>g是距离滤波器内核，定义为：exp([-d_g^2]/[2*sigma_g^2])</li>
+</ul>
+<p>其中：d_g为引导图像的像素灰度值差，sigma_g为滤波核函数的标准差</p>
+<p>输入图像<em>I</em>下采样（1/2）得到LR低分辨率图像，再由LR图像上采样2倍得到引导图像。</p>
+<p>注：图像缩放采用双线性插值。</p>
+<p>联合双边滤波处理如果不理解可以看看其他人的博客，是个很巧妙的算法（实验太多了，有时间补上介绍）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Oct 31 22:29:36 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: stayhome</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Bilinear_Interpolation</span><span class="params">(Src,Size)</span>:</span></span><br><span class="line">    sh,sw,sc = Src.shape</span><br><span class="line">    dh,dw,dc = Size</span><br><span class="line">    Dst = np.zeros(Size)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(sc):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(dh):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(dw):</span><br><span class="line">                x = (i + <span class="number">0.5</span>)/ dh * sh - <span class="number">0.5</span></span><br><span class="line">                y = (j + <span class="number">0.5</span>)/ dw * sw - <span class="number">0.5</span></span><br><span class="line">                x0 = int(np.floor(x))</span><br><span class="line">                y0 = int(np.floor(y))</span><br><span class="line">                x1 = min(x0 + <span class="number">1</span>, sh - <span class="number">1</span>)</span><br><span class="line">                y1 = min(y0 + <span class="number">1</span>, sw - <span class="number">1</span>)</span><br><span class="line">                f1 = (y1 - y)*Src[x0][y0][k] + (y-y0)*Src[x0][y1][k]</span><br><span class="line">                f2 = (y1 - y)*Src[x1][y0][k] + (y-y0)*Src[x1][y1][k]</span><br><span class="line">                Dst[i][j][k] = (x1 - x)*f1 +(x - x0)*f2</span><br><span class="line">    <span class="keyword">return</span> Dst</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jbf</span><span class="params">(Src,Joint,W,sig_f,sig_g)</span>:</span></span><br><span class="line">    h,w,c = Src.shape</span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    dh,dw,dc = Joint.shape</span><br><span class="line">    h = min(h,dh)</span><br><span class="line">    w = min(w,dw)</span><br><span class="line">    dc = min(dc,c)</span><br><span class="line">    new = np.zeros((h,w,c))</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(c):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(h):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(w):</span><br><span class="line">                iS = max(i - W,<span class="number">0</span>)</span><br><span class="line">                iE = min(i + W,h - <span class="number">1</span>)</span><br><span class="line">                jS = max(j - W,<span class="number">0</span>)</span><br><span class="line">                jE = min(j + W,w - <span class="number">1</span>)</span><br><span class="line">                winSrc = Src[iS:iE,jS:jE,k]</span><br><span class="line">                winJoint = Joint[iS:iE,jS:jE,k]</span><br><span class="line">                fh,fw = winSrc.shape</span><br><span class="line">                Sum = <span class="number">0</span></span><br><span class="line">                value = <span class="number">0</span></span><br><span class="line">                <span class="keyword">for</span> p <span class="keyword">in</span> range(fh):</span><br><span class="line">                    <span class="keyword">for</span> q <span class="keyword">in</span> range(fw):</span><br><span class="line">                        dg = winJoint[p][q] - Joint[i][j][k]</span><br><span class="line">                        dx = p + iS - i</span><br><span class="line">                        dy = q + jS - j</span><br><span class="line">                        temp = <span class="number">100</span> * np.exp(<span class="number">-0.5</span> * (dg ** <span class="number">2</span>)/(sig_g**<span class="number">2</span>)) * np.exp(- <span class="number">0.5</span> * (dx ** <span class="number">2</span>+ dy ** <span class="number">2</span>)/(sig_f ** <span class="number">2</span>))</span><br><span class="line">                        Sum = Sum + temp</span><br><span class="line">                        value = value + temp * Src[iS + p][jS + q][k]</span><br><span class="line">                <span class="keyword">if</span>(Sum == <span class="number">0</span>) :</span><br><span class="line">                    new[i][j][k] = Src[i][j][k]</span><br><span class="line">                <span class="keyword">else</span> :</span><br><span class="line">                    new[i][j][k] = value / Sum</span><br><span class="line">                    cnt+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> new,cnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">"2_2.png"</span>)</span><br><span class="line">Size = img.shape</span><br><span class="line"></span><br><span class="line">newSize = (Size[<span class="number">0</span>]//<span class="number">2</span>,Size[<span class="number">1</span>]//<span class="number">2</span>,Size[<span class="number">2</span>])</span><br><span class="line">Dst = Bilinear_Interpolation(img,newSize)</span><br><span class="line"><span class="comment">#cv.imwrite("2_2new1.png",Dst)</span></span><br><span class="line">Size = (newSize[<span class="number">0</span>]*<span class="number">2</span>,newSize[<span class="number">1</span>]*<span class="number">2</span>,Size[<span class="number">2</span>])</span><br><span class="line">joint = Bilinear_Interpolation(Dst,Size)</span><br><span class="line"><span class="comment">#cv.imwrite("2_2new2.png",joint)</span></span><br><span class="line">res,ans = jbf(img,joint,<span class="number">5</span>,<span class="number">2</span>,<span class="number">30</span>)</span><br><span class="line">cv.imwrite(<span class="string">"2_2new3.png"</span>,res)</span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
+<h3 id="实验3-几何变换与变形"><a href="#实验3-几何变换与变形" class="headerlink" title="实验3 几何变换与变形"></a>实验3 几何变换与变形</h3><p>实验3-1：图像缩放</p>
+<p><strong>实验要求：</strong></p>
+<p>1）实现一个图像缩放函数，可以对输入图像进行任意倍数的缩放；</p>
+<p>2）采用双线性插值进行重采样；</p>
+<p>3）X,Y方向的缩放倍数参函数参数的形式传入；</p>
+<p>4）可以只考虑输入图像为3通道，8位深度的情况；</p>
+<p>5）不能调用图像处理库的缩放函数来完成；</p>
+<p>一个没什么意义的实验，之前在实验2-2中已经使用过双线性差值法了，这里只是更改一下函数的参数就可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Nov  9 19:25:36 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: stayhome</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Bilinear_Interpolation</span><span class="params">(Src,high,width)</span>:</span></span><br><span class="line">    sh,sw,sc = Src.shape</span><br><span class="line">    dh,dw,dc = int(high*sh),int(width*sw),sc</span><br><span class="line">    Dst = np.zeros((dh,dw,dc))</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(sc):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(dh):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(dw):</span><br><span class="line">                x = (i + <span class="number">0.5</span>)/ dh * sh - <span class="number">0.5</span></span><br><span class="line">                y = (j + <span class="number">0.5</span>)/ dw * sw - <span class="number">0.5</span></span><br><span class="line">                x0 = int(np.floor(x))</span><br><span class="line">                y0 = int(np.floor(y))</span><br><span class="line">                x1 = min(x0 + <span class="number">1</span>, sh - <span class="number">1</span>)</span><br><span class="line">                y1 = min(y0 + <span class="number">1</span>, sw - <span class="number">1</span>)</span><br><span class="line">                f1 = (y1 - y)*Src[x0][y0][k] + (y-y0)*Src[x0][y1][k]</span><br><span class="line">                f2 = (y1 - y)*Src[x1][y0][k] + (y-y0)*Src[x1][y1][k]</span><br><span class="line">                Dst[i][j][k] = (x1 - x)*f1 +(x - x0)*f2</span><br><span class="line">    <span class="keyword">return</span> Dst</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">"lab2.png"</span>) </span><br><span class="line">img = Bilinear_Interpolation(img,<span class="number">1.3</span>,<span class="number">0.6</span>)</span><br><span class="line">out_deal = img.astype(np.uint8)  </span><br><span class="line">cv.namedWindow(<span class="string">"Image"</span>)   </span><br><span class="line">cv.imshow(<span class="string">"Image"</span>, out_deal)   </span><br><span class="line">cv.waitKey (<span class="number">0</span>)  </span><br><span class="line">cv.destroyAllWindows()  </span><br><span class="line"><span class="comment">#cv.imwrite("3_1.png",img)</span></span><br></pre></td></tr></table></figure>
+<p>实验3-2：图像变形</p>
+<p><strong>实验要求：</strong></p>
+<p>记<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vh2p0t9j302d00la9t.jpg" alt="img">为像素坐标的一个映射，实现<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vhgy8hgj300c00l0ad.jpg" alt="img">所表示的图像形变。<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vhrt9boj300c00l0ad.jpg" alt="img">的逆映射为：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vi5an3fj30ax013t8k.jpg" alt="img"></p>
+<p>其中：</p>
+<p>​     <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vipurzfj302a00q0sh.jpg" alt="img">  <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vik6f7qj301n00l0of.jpg" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vix9ocmj300s00l0gw.jpg" alt="img">，<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vj4sy2cj300y00l0ja.jpg" alt="img">都是中心归一化坐标，请先进行转换；</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vk7op6zj30b703wwe9.jpg" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97vkrf57lj304n01baa2.jpg" alt="image-20191123124702326">     </p>
+<p>这个实验也是很简单的，逆变换公式公式已经给出，只需要枚举变换后的新图的坐标，坐标中心归一化之后计算得到r和cita，根据逆映射公式计算得到中心归一化的原图中像素点的位置，将其转化为原坐标，对应进行填充即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Nov  9 19:40:22 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: stayhome</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transshape</span><span class="params">(Input)</span>:</span></span><br><span class="line">    higth,width,channel = Input.shape</span><br><span class="line">    out = np.zeros(Input.shape)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(higth):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(width):</span><br><span class="line">            tempx = (i - higth * <span class="number">0.5</span>)/(<span class="number">0.5</span> * higth)</span><br><span class="line">            tempy = (j - width * <span class="number">0.5</span>)/(<span class="number">0.5</span> * width)</span><br><span class="line">            r = math.sqrt(tempx**<span class="number">2</span>+tempy**<span class="number">2</span>)</span><br><span class="line">            th = (<span class="number">1.0</span> - r)**<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> r &gt;= <span class="number">1</span> :</span><br><span class="line">                xp = tempx</span><br><span class="line">                yp = tempy</span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                xp = math.cos(th) * tempx - math.sin(th) * tempy</span><br><span class="line">                yp = math.sin(th) * tempx + math.cos(th) * tempy</span><br><span class="line">            x = int((xp + <span class="number">1</span>) * <span class="number">0.5</span> * higth)<span class="comment">#坐标转化 或者说逆中心归一化</span></span><br><span class="line">            y = int((yp + <span class="number">1</span>) * <span class="number">0.5</span> * width)</span><br><span class="line">            out[i,j,:] = Input[x,y,:]</span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">"lab2.png"</span>)</span><br><span class="line">out = transshape(img)</span><br><span class="line">out_deal = out.astype(np.uint8)  </span><br><span class="line">cv.namedWindow(<span class="string">"Image"</span>)   </span><br><span class="line">cv.imshow(<span class="string">"Image"</span>, out_deal)   </span><br><span class="line">cv.waitKey (<span class="number">0</span>)  </span><br><span class="line">cv.destroyAllWindows()</span><br><span class="line">cv.imwrite(<span class="string">"3_2.png"</span>,out)</span><br></pre></td></tr></table></figure>
+<h3 id="实验4-人脸面部识别"><a href="#实验4-人脸面部识别" class="headerlink" title="实验4 人脸面部识别"></a>实验4 人脸面部识别</h3><p>简介：人脸面部识别技术</p>
+<p>基于人的脸部特征信息进行身份识别的一种生物识别技术。用摄像机或摄像头采集含有人脸的图像或视频流，并自动在图像中检测和跟踪人脸，进而对检测到的人脸进行脸部识别的一系列相关技术，通常也叫做人像识别、面部识别。</p>
+<p>下面的实验内容是简单识别出图像中人物的面部，进而为以后更深层次的学习打下基础。</p>
+<p><strong>实验要求</strong>：</p>
+<p>1）介绍人脸识别技术的基本实现原理；</p>
+<p>2）人脸识别程序流程图设计；</p>
+<p>3）根据提供的图像或自己选用图像，编写程序，能够识别出图像中人物的脸部；<strong>识别时用的人脸特征：</strong>“三庭五眼 ”规则高度和宽度比例应该在（ 0.6, 2）内”+眼部特征</p>
+<p>大体思路如下：</p>
+<p>根据RGB图像转化为YUV（YCbCr）空间，因为YUV色彩空间是考虑人眼对于亮度更敏感的特性，同时对皮肤检测效果也比较好，根据对应的Y Cb Cr三个分量的值将近似皮肤的区域在灰度图上做标记得到转化的二值图像，对所得二值图像进行开操作去除那些孤立的点或者说噪声，检测二值图像的所有联通块，得到包含联通块的最小矩形，这些矩形均可能是人脸的位置，对矩形的大小和“三庭五眼 ”规则高度和宽度比例应该在（ 0.6, 2）内这一要求进行初步筛选，之后再检测包含联通块中是否有三个以上的小联通块，即有没有眼睛和嘴巴</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g97vxufw74j30o10ul75d.jpg" alt="未命名文件"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">		gray = cv.cvtColor(src,cv.COLOR_BGR2GRAY)</span><br><span class="line">    ycbcr = cv.cvtColor(src,cv.COLOR_BGR2YCrCb)</span><br><span class="line">    (y,cr,cb) = cv.split(ycbcr)</span><br><span class="line">    (we,he) = cr.shape</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(we):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(he):</span><br><span class="line">            Y = ycbcr[i][j][<span class="number">0</span>]</span><br><span class="line">            Cr = ycbcr[i][j][<span class="number">1</span>]</span><br><span class="line">            Cb = ycbcr[i][j][<span class="number">2</span>]</span><br><span class="line">            <span class="keyword">if</span> Y &lt; <span class="number">80</span> :</span><br><span class="line">                gray[i][j] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                <span class="keyword">if</span> judgeskin(Y,Cb,Cr) == <span class="literal">True</span>:</span><br><span class="line">                    gray[i][j] = <span class="number">255</span></span><br><span class="line">                <span class="keyword">else</span> :</span><br><span class="line">                    gray[i][j] = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">judgeskin</span><span class="params">(Y,Cb,Cr)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> Cr &gt; <span class="number">133</span> <span class="keyword">and</span> Cr &lt;<span class="number">173</span> <span class="keyword">and</span> Cb &gt; <span class="number">77</span> <span class="keyword">and</span> Cb &lt;<span class="number">127</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>根据亮度（Y）进行初步筛选，然后根据Cr 和 Cb进行筛选，得到的二值图像如下</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g97w25xvpzj30hs0cujs3.jpg" style="zoom:50%;"></p>
+<p>还是会有误判的区域，不过不是很影响结果，对于求解连通区域以及最小矩形，我是调用了库函数cv2.connectedComponentsWithStats(image)</p>
+<p>之后的筛选条件不唯一，我是根据一般人拍照的习惯进行筛选，人脸的位置不会在边缘位置</p>
+<p>还有矩形长宽比的设置（0.6，2.5）因为左边那个姑娘敞着怀，所以她的“脸”比较长，为了照顾她我调大了0.5</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Wed Nov 20 17:04:02 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: stayhome</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> skimage.measure</span><br><span class="line"><span class="keyword">from</span> skimage.measure <span class="keyword">import</span> label,regionprops</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findeye</span><span class="params">(src,x,y,w,h)</span> :</span></span><br><span class="line">    borderx,bordery = src.shape</span><br><span class="line">    borderx = min(borderx,x+w)</span><br><span class="line">    bordery = min(bordery,y+h)</span><br><span class="line">    part = np.zeros((bordery-y,borderx-x))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(y,bordery) :</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(x,borderx) :</span><br><span class="line">                <span class="keyword">if</span> src[i][j] == <span class="number">0</span>:</span><br><span class="line">                    part[i-y][j-x] = <span class="number">255</span></span><br><span class="line">                <span class="keyword">else</span> :</span><br><span class="line">                    part[i-y][j-x] = <span class="number">0</span></span><br><span class="line">    res = label(part,connectivity = <span class="number">2</span>)</span><br><span class="line">    num = np.max(res)</span><br><span class="line">    <span class="comment">#print("%d ?"%num)</span></span><br><span class="line">    <span class="keyword">if</span> num&gt;=<span class="number">3</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">judgeskin</span><span class="params">(Y,Cb,Cr)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> Cr &gt; <span class="number">133</span> <span class="keyword">and</span> Cr &lt;<span class="number">173</span> <span class="keyword">and</span> Cb &gt; <span class="number">77</span> <span class="keyword">and</span> Cb &lt;<span class="number">127</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(src)</span>:</span></span><br><span class="line">    gray = cv.cvtColor(src,cv.COLOR_BGR2GRAY)</span><br><span class="line">    color = (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">    ycbcr = cv.cvtColor(src,cv.COLOR_BGR2YCrCb)</span><br><span class="line">    (y,cr,cb) = cv.split(ycbcr)</span><br><span class="line">    (we,he) = cr.shape</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(we):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(he):</span><br><span class="line">            Y = ycbcr[i][j][<span class="number">0</span>]</span><br><span class="line">            Cr = ycbcr[i][j][<span class="number">1</span>]</span><br><span class="line">            Cb = ycbcr[i][j][<span class="number">2</span>]</span><br><span class="line">            <span class="keyword">if</span> Y &lt; <span class="number">80</span> :</span><br><span class="line">                gray[i][j] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                <span class="keyword">if</span> judgeskin(Y,Cb,Cr) == <span class="literal">True</span>:</span><br><span class="line">                    gray[i][j] = <span class="number">255</span></span><br><span class="line">                <span class="keyword">else</span> :</span><br><span class="line">                    gray[i][j] = <span class="number">0</span></span><br><span class="line">    kernel = cv.getStructuringElement(cv.MORPH_RECT,(<span class="number">5</span>,<span class="number">5</span>))</span><br><span class="line">    gray = cv.morphologyEx(gray, cv.MORPH_OPEN, kernel)</span><br><span class="line">    cv.imwrite(<span class="string">"aaa.jpg"</span>,gray)</span><br><span class="line">    nccomps = cv.connectedComponentsWithStats(gray)</span><br><span class="line">    label = nccomps[<span class="number">1</span>]</span><br><span class="line">    stats = nccomps[<span class="number">2</span>]</span><br><span class="line">    cen = nccomps[<span class="number">3</span>]</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(stats)):</span><br><span class="line">        box = stats[i]</span><br><span class="line">        x = box[<span class="number">0</span>]</span><br><span class="line">        y = box[<span class="number">1</span>]</span><br><span class="line">        w = box[<span class="number">2</span>]</span><br><span class="line">        h = box[<span class="number">3</span>]</span><br><span class="line">        ratio = h/w</span><br><span class="line">        <span class="keyword">if</span> w&lt;<span class="number">30</span> <span class="keyword">or</span> h&lt;<span class="number">30</span> <span class="keyword">or</span> w*h&lt;<span class="number">900</span> <span class="keyword">or</span> w &gt;=<span class="number">500</span> <span class="keyword">or</span> h &gt;= <span class="number">500</span> :</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">elif</span> ratio &lt; <span class="number">2.5</span> <span class="keyword">and</span> ratio &gt; <span class="number">0.6</span> <span class="keyword">and</span> findeye(gray,x,y,w,h)==<span class="number">1</span> :</span><br><span class="line">            result.append([x,y,w,h])</span><br><span class="line">    <span class="keyword">for</span> ans <span class="keyword">in</span> result :</span><br><span class="line">        x = ans[<span class="number">0</span>]</span><br><span class="line">        y = ans[<span class="number">1</span>]</span><br><span class="line">        w = ans[<span class="number">2</span>]</span><br><span class="line">        h = ans[<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> y&gt;=<span class="number">0.05</span>*he <span class="keyword">and</span> y&lt;=<span class="number">0.5</span>*he:</span><br><span class="line">            cv.rectangle(src,(x<span class="number">-6</span>,y<span class="number">-6</span>),(x+w+<span class="number">6</span>,y+h+<span class="number">6</span>),color,<span class="number">2</span>)</span><br><span class="line">    dst = src.astype(np.uint8)</span><br><span class="line">    cv.imwrite(<span class="string">'second1.jpg'</span>,dst)</span><br><span class="line">    cv.imshow(<span class="string">"show"</span>,dst)</span><br><span class="line">    cv.waitKey(<span class="number">0</span>)</span><br><span class="line">    cv.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    path = <span class="string">"Orical1.jpg"</span></span><br><span class="line">    image = cv.imread(path)</span><br><span class="line">    test(image)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g980sjaqadj30hs0es414.jpg" alt="1574405311462"></p>
+<p>识别的结果<del>非常好</del></p>
+<p>实验题目和所学内容关联度不大，课本选取也不好，课程名叫计算机视觉其实是在通篇讲数字图像处理，这个课程开的毫无意义，授课内容没区别完全可以让实验班去选普通班的课啊，绩点还高一点。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学期作业/" rel="tag"># 学期作业</a>
+          
+            <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/19/小zhai的锻炼挑战/" rel="next" title="小zhai的锻炼挑战">
+                <i class="fa fa-chevron-left"></i> 小zhai的锻炼挑战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">当时只道是寻常</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
