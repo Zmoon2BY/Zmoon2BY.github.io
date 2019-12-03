@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="信息检索,学期作业,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于 XUNSEARCH概况Xunsearch 一个是以 GPL 协议开源发布的高性能、全功能的全文检索解决方案，并针对中文深度优化和处理，用于帮助开 发者针对海量数据快速建立搜索引擎。  Xunsearch 采用结构化分层设计，包含后端服务器和前端开发包两大部分。后端是用 C/C++ 基于 Xapian (读 /zap-ian/) 搜 索库、SCWS 中文分词、libevent 等开源库开发，借">
+<meta name="keywords" content="信息检索,学期作业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xunsearch搭建本地搜索引擎">
+<meta property="og:url" content="http://yoursite.com/2019/12/01/Xunsearch搭建本地搜索引擎/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="关于 XUNSEARCH概况Xunsearch 一个是以 GPL 协议开源发布的高性能、全功能的全文检索解决方案，并针对中文深度优化和处理，用于帮助开 发者针对海量数据快速建立搜索引擎。  Xunsearch 采用结构化分层设计，包含后端服务器和前端开发包两大部分。后端是用 C/C++ 基于 Xapian (读 /zap-ian/) 搜 索库、SCWS 中文分词、libevent 等开源库开发，借">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9h3xp7g21j30f806p751.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9h49812i7j30bk07z0us.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9h85gr30wj30h708xad4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9it2gr81wj30yg0mjdrz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9jbsqm0lfj30vl0lwjtl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9jbsk7ed1j30g706btb5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9jbtw4296j30vl0lwn6v.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf5u7uxoj30vl0lwae4.jpg">
+<meta property="og:updated_time" content="2019-12-03T04:26:06.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xunsearch搭建本地搜索引擎">
+<meta name="twitter:description" content="关于 XUNSEARCH概况Xunsearch 一个是以 GPL 协议开源发布的高性能、全功能的全文检索解决方案，并针对中文深度优化和处理，用于帮助开 发者针对海量数据快速建立搜索引擎。  Xunsearch 采用结构化分层设计，包含后端服务器和前端开发包两大部分。后端是用 C/C++ 基于 Xapian (读 /zap-ian/) 搜 索库、SCWS 中文分词、libevent 等开源库开发，借">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9h3xp7g21j30f806p751.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/01/Xunsearch搭建本地搜索引擎/">
+
+
+
+
+
+  <title>Xunsearch搭建本地搜索引擎 | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/Xunsearch搭建本地搜索引擎/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Xunsearch搭建本地搜索引擎</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T12:12:42+08:00">
+                2019-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="关于-XUNSEARCH"><a href="#关于-XUNSEARCH" class="headerlink" title="关于 XUNSEARCH"></a>关于 XUNSEARCH</h3><h4 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h4><p>Xunsearch 一个是以 GPL 协议开源发布的高性能、全功能的全文检索解决方案，并针对中文深度优化和处理，用于帮助开 发者针对海量数据快速建立搜索引擎。 </p>
+<p>Xunsearch 采用结构化分层设计，包含后端服务器和前端开发包两大部分。后端是用 C/C++ 基于 Xapian (读 /zap-ian/) 搜 索库、SCWS 中文分词、libevent 等开源库开发，借鉴了 nginx 的多进程多线程混合工作方式，是一个可承载高并发的高 性能服务端。前端则是使用流行的脚本语言编写的开发工具包 (即 SDK)，API 简单清晰上手容易，并附带全中文的示例代码、文档和辅助工具，目前只支持 PHP 语言。 </p>
+<h4 id="特色优势"><a href="#特色优势" class="headerlink" title="特色优势"></a>特色优势</h4><ul>
+<li>海量数据下高速搜索响应。单库最多支持 40 亿条数据，在 500 万张网页1.5TB 数据中，非缓存检索时间约 0.5 秒。 </li>
+<li>专为搜索而自主开发的 scws 中文分词，支持复合分词、自定义补充词库，保障查全率、准确率。</li>
+<li>健壮稳定的后端守护程序，内置缓存池与线程池用于保障性能。</li>
+<li>索引接口齐全易用，支持实时搜索，支持任何数据库源 (不局限于 SQL)。 </li>
+<li>极低的开发难度，具备规范的中文文档，示范代码，辅助工具。</li>
+<li>除通用搜索引擎功能外，还内置支持拼音检索、分面搜索、相关搜索、同义词搜索、搜索纠错建议等专业功能。</li>
+<li>与 Lucene/Sphinx 等相比，xunsearch 提供了更丰富且必需的功能，开发难度更低，开发周期更短。  </li>
+</ul>
+<h4 id="应用领域"><a href="#应用领域" class="headerlink" title="应用领域"></a>应用领域</h4><ul>
+<li>目前后端服务器只支持 UNIX (含Linux/BSD/MacOS等) 操作系统，前端开发包只支持 PHP 语言。 </li>
+<li>Xunsearch可以帮助您建立门户/垂直搜索/论坛搜索/WEB站内搜索/文档文献资料搜索等。 </li>
+</ul>
+<p>以上内容均来自官方介绍，因为我使用开源的搜索引擎只是为了完成我的信息检索大作业而已，所以我选择了这个上手难度小的<a href="http://www.xunsearch.com/doc/php/guide/start.demo" target="_blank" rel="noopener">xunsearch</a>,支持中文搜索、支持任何数据库源、开发难度低、有中文文档，还要啥自行车？</p>
+<h3 id="安装XUNSEARCH"><a href="#安装XUNSEARCH" class="headerlink" title="安装XUNSEARCH"></a>安装XUNSEARCH</h3><p>下载xunsearch-full-latest.tar.bz2安装包，并移动到用户主目录下，执行解压命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.xunsearch.com/download/xunsearch-full-latest.tar.bz2</span><br><span class="line">tar -xjf xunsearch-full-latest.tar.bz2</span><br></pre></td></tr></table></figure>
+<p>运行安装脚本，直接采用默认目录即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> xunsearch-full-1.4.14</span><br><span class="line">sh setup.sh</span><br></pre></td></tr></table></figure>
+<p>执行脚本之后终端如图，输入Y之后开始安装各种依赖和配置，安装时间比较长，我的垃圾MAC嗡嗡跑了半天</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9h3xp7g21j30f806p751.jpg" alt="WeChata09e6cce4b24fd4af34e220df93c9a51"></p>
+<p>安装成功之后显示</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9h49812i7j30bk07z0us.jpg" alt="image-20191201123725898"></p>
+<ul>
+<li><p>开启/重新开启 xunsearch 服务程序，命令 /Users/stayhome/xunsearch/bin/xs-ctl.sh restart</p>
+</li>
+<li><p>所有的索引数据将被保存在下面这个目录中：/Users/stayhome/xunsearch/data</p>
+</li>
+</ul>
+<p>然后自己跑一跑demo，如果是Mac用户的话，启动xunsearch服务器之后照着官方给的教程试一下就行</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9h85gr30wj30h708xad4.jpg" alt="image-20191201145212211"></p>
+<p><del>有一说一，zsh真难看啊，今天才发现Macos更新为10.15之后把之前设置的bash换成zsh了,所以我又换回去了</del></p>
+<p>之后的工作是把之前写好的爬虫爬来的数据丢到数据库里，我用的是mysql5.7.28，对应的python包是pymysql</p>
+<p>两个安装都比较容易，mysql的配置网上教程也比较多 </p>
+<p>比较常见的坑是安装mysql之后，使用默认密码登录root用户时ERROR 1045 (28000)，解决方法修改/usr/local/mysql/support-files/my-default.cnf,在[mysqld]底下加一句skip-grant-tables，如果没有这个文件就在/etc下建一个my.cnf</p>
+<p>我的是新版的mysql，所以报错解决方法是第二个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc</span><br><span class="line">sudo vim my.cnf</span><br><span class="line"><span class="comment">#其他具体内容可以拷贝其他人的，然后加那句话</span></span><br><span class="line">sudo chmod 664 /etc/my.cnf</span><br><span class="line"><span class="comment">#加权限</span></span><br></pre></td></tr></table></figure>
+<p>重启mysql，输密码的时候回车跳过即可，然后修改root的密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set password for &apos;root&apos;@&apos;localhost&apos; = password(&apos;123456&apos;);</span><br><span class="line"></span><br><span class="line">update mysql.user set plugin = &apos;mysql_native_password&apos; where user=&apos;root&apos;;</span><br><span class="line"></span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>然后建立一个叫IRdata的数据库，利用pymysql连接数据库，进行建表、插入数据等</p>
+<p>以上操作结束之后，放了20条数据在里面</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9it2gr81wj30yg0mjdrz.jpg" style="zoom:33%;"></p>
+<p>然后开启mac的php环境，打开/etc/apache2/httpd.cnf，要在管理员权限下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apache2/httpd.conf</span><br><span class="line">/php <span class="comment">#命令模式下搜索php，把注释取消掉，&lt;ESC&gt; : wq 保存退出</span></span><br><span class="line">sudo apachectl restart</span><br></pre></td></tr></table></figure>
+<p>之后可以在<a href="http://www.xunsearch.com/doc/php/guide/util.skel" target="_blank" rel="noopener">生成搜索骨架代码</a>指导下，在本地生成一个搜索的前端界面</p>
+<blockquote>
+<ol>
+<li><p>主要参数和选项</p>
+<p>要使用本工具，必须先指定的项目名称或配置文件，它将根据该项目的情况生成代码，主要选项如下：</p>
+</li>
+</ol>
+<ul>
+<li>-p|—project * 指定项目名称或配置文件路径，参数名可以省略不写， 如果仅指定项目名称，那么将使用 $prefix/sdk/php/app/.ini 文件。</li>
+<li>-o|—output &lt;..dir..&gt;* 指定生成的代码目录的存放位置，默认放在当前目录中， 生成的代码本身包含一层以项目名称命名的目录。建议直接将目录指定到web 可访问目录。</li>
+</ul>
+</blockquote>
+<p>把生成的文件夹拖到/Library/WebServer/Documents 之下，然后浏览器访问即可</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jbsqm0lfj30vl0lwjtl.jpg" alt="image-20191203102137175" style="zoom:50%;"></p>
+<p>这个时候是搜不到结果的，需要从数据库里选取数据建索引和分词，我的做法很简单</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">util/Indexer.php --<span class="built_in">source</span>=mysql://root:root密码@127.0.0.1/IRdata --sql=<span class="string">"SELECT id,timesource,title,content FROM technews"</span> --project=techseo</span><br><span class="line"><span class="comment">#数据库方式创建索引</span></span><br><span class="line">util/Indexer.php --rebuild --<span class="built_in">source</span>=mysql://root:root密码@127.0.0.1/IRdata --sql=<span class="string">"SELECT id,timesource,title,content FROM technews"</span> --project=techseo</span><br><span class="line"><span class="comment">#平滑重建索引</span></span><br></pre></td></tr></table></figure>
+<p>特别说明：索引提交完成后，并不是索引库就有索引了，索引只是提交到了后台处理，索引会在后台慢慢创建，所以会出现后面数据搜索不到的情况，过一会就好了（看数据多少）</p>
+<p>因为测试用例只有20条，所以一瞬间就好了</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jbsk7ed1j30g706btb5.jpg" alt="image-20191203102919406"></p>
+<p>现在在前端页面进行搜索，可以得到搜索结果</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jbtw4296j30vl0lwn6v.jpg" alt="image-20191203103036730"></p>
+<p>之后重新用爬虫爬取数据，扩大一下数据规模，网易新闻每个科技专区只有10页，最后全部爬取之后大概有990+文章是符合要求的</p>
+<p>在xunsearch提供的demo之中有些比较好的案例</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ini_set(<span class="string">'display_errors'</span> , <span class="string">'On'</span>);  </span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">'/usr/local/xunsearch/sdk/php/lib/XS.php'</span>;   <span class="comment">//  引入 xunsearch sdk  </span></span><br><span class="line">$xs = <span class="keyword">new</span> XS(<span class="string">'/usr/local/xunsearch/sdk/php/app/demo.ini'</span>);    <span class="comment">// demo  为项目名称，配置文件是：$sdk/app/demo.ini  </span></span><br><span class="line">  </span><br><span class="line">$search = $xs-&gt;search;  </span><br><span class="line">  </span><br><span class="line">$query = <span class="string">'hjy'</span>; <span class="comment">// 这里的搜索语句很简单，就一个短语  </span></span><br><span class="line">  </span><br><span class="line">$search-&gt;setFuzzy(); <span class="comment">//设置模糊搜索  </span></span><br><span class="line">$search-&gt;setQuery($query); <span class="comment">// 设置搜索语句  </span></span><br><span class="line">  </span><br><span class="line">$search-&gt;setLimit( <span class="number">100</span> );  </span><br><span class="line">$docs = $search-&gt;search(); <span class="comment">// 执行搜索，将搜索结果文档保存在 $docs 数组中  </span></span><br><span class="line">var_dump($docs);  </span><br><span class="line">$count = $search-&gt;count(); <span class="comment">// 获取搜索结果的匹配总数估算值  </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;hr/&gt;'</span>;  </span><br><span class="line">var_dump($count);</span><br></pre></td></tr></table></figure>
+<p>作为一个2学分而且实验成绩只占20%的课程，做到这样大概就差不多了</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf5u7uxoj30vl0lwae4.jpg" alt="656601575346925_.pic_hd" style="zoom:50%;"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/信息检索/" rel="tag"># 信息检索</a>
+          
+            <a href="/tags/学期作业/" rel="tag"># 学期作业</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/leetcode周赛入门/" rel="next" title="leetcode周赛入门">
+                <i class="fa fa-chevron-left"></i> leetcode周赛入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">加倍努力！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
