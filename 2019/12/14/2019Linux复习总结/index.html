@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.课程基础操作系统的定义 ​        操作系统是计算机系统的基本系统软件。操作系统是所有软件的核心。操作系统负责控制、管理计算机的所有软件、硬件资源，是唯一直接和硬件系统打交道的软件，是整个软件系统的基础部分，同时还为计算机用户提供良好的界面。因此，操作系统直接面对所有硬件、软件和用户，它是协调计算机各组成部分之间、人机之间关系的重要软件系统。 操作系统的分类 ​         五种主要">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019Linux复习总结">
+<meta property="og:url" content="http://yoursite.com/2019/12/14/2019Linux复习总结/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="1.课程基础操作系统的定义 ​        操作系统是计算机系统的基本系统软件。操作系统是所有软件的核心。操作系统负责控制、管理计算机的所有软件、硬件资源，是唯一直接和硬件系统打交道的软件，是整个软件系统的基础部分，同时还为计算机用户提供良好的界面。因此，操作系统直接面对所有硬件、软件和用户，它是协调计算机各组成部分之间、人机之间关系的重要软件系统。 操作系统的分类 ​         五种主要">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9waezytorj30ec08tq3d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9wbvfbxz4j30k00f0ta4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9wcovjvaoj30eq03y0sy.jpg">
+<meta property="og:updated_time" content="2019-12-14T08:56:00.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019Linux复习总结">
+<meta name="twitter:description" content="1.课程基础操作系统的定义 ​        操作系统是计算机系统的基本系统软件。操作系统是所有软件的核心。操作系统负责控制、管理计算机的所有软件、硬件资源，是唯一直接和硬件系统打交道的软件，是整个软件系统的基础部分，同时还为计算机用户提供良好的界面。因此，操作系统直接面对所有硬件、软件和用户，它是协调计算机各组成部分之间、人机之间关系的重要软件系统。 操作系统的分类 ​         五种主要">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1g9waezytorj30ec08tq3d.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/14/2019Linux复习总结/">
+
+
+
+
+
+  <title>2019Linux复习总结 | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/14/2019Linux复习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019Linux复习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-14T12:11:54+08:00">
+                2019-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-课程基础"><a href="#1-课程基础" class="headerlink" title="1.课程基础"></a>1.课程基础</h3><p><strong>操作系统的定义</strong></p>
+<p>​        操作系统是计算机系统的基本系统软件。操作系统是所有软件的核心。操作系统负责控制、管理计算机的所有软件、硬件资源，是唯一直接和硬件系统打交道的软件，是整个软件系统的基础部分，同时还为计算机用户提供良好的界面。因此，操作系统直接面对所有硬件、软件和用户，它是协调计算机各组成部分之间、人机之间关系的重要软件系统。</p>
+<p><strong>操作系统的分类</strong></p>
+<p>​         五种主要的操作系统（工作方式）：批处理操作系统、分时操作系统、实时操作系统、网络操作系统、分布式操作系统</p>
+<p><strong>硬件、操作系统及应用程序关系图</strong></p>
+<p>​        <img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9waezytorj30ec08tq3d.jpg" alt="image-20191214153356367"></p>
+<h3 id="2-Linux基本命令"><a href="#2-Linux基本命令" class="headerlink" title="2.Linux基本命令"></a>2.Linux基本命令</h3><p><strong>Linux原作者</strong></p>
+<p>​        Linus Torvalds</p>
+<p><strong>Linux系统的内核构成</strong></p>
+<p>是Linux操作系统的核心程序，其必须完成以下内容： </p>
+<ul>
+<li>管理程序的运行，为程序分配资源，并且处理程序之间的通信。</li>
+<li>管理对文件系统的读写，把对文件系统的操作映射成对磁盘或其它块设备的操作。</li>
+<li>管理存储器，为程序分配内存，并且管理虚拟内存。</li>
+<li>管理输入、输出，将设备映射成设备文件。</li>
+<li>管理网络。 </li>
+</ul>
+<p><strong>date</strong></p>
+<p>显示日期和时间    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$date</span>    显示日期和时间	</span><br><span class="line">Wed Sep 29 09:58:29 CST 2004</span><br><span class="line"><span class="comment">#date -s 20041229    设置日期	</span></span><br><span class="line">Wed Dec 29 00:00:00 CST 2004</span><br><span class="line"><span class="comment">#date -s 12:23:23    设置时间</span></span><br><span class="line"><span class="comment">#date -s “2006-10-10 12:12:23″</span></span><br></pre></td></tr></table></figure>
+<p>注：系统日期只能有系统管理员来设置<br>CST：China Standard Time  中国标准时间  </p>
+<p><strong>cal</strong> </p>
+<p>显示日历<br>cal [month] [year]</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cal</span> 1 2000</span><br><span class="line"> January 2000</span><br><span class="line">Su Mo Tu We Th Fr Sa </span><br><span class="line">                   1</span><br><span class="line"> 2  3  4  5  6  7  8</span><br><span class="line"> 9 10 11 12 13 14 15</span><br><span class="line">16 17 18 19 20 21 22</span><br><span class="line">23 24 25 26 27 28 29</span><br><span class="line">30 31</span><br><span class="line"><span class="variable">$cal</span>   只显示当前月份信息</span><br><span class="line">     十月 2009      </span><br><span class="line">日 一 二 三 四 五 六</span><br><span class="line">             1  2  3</span><br><span class="line"> 4  5  6  7  8  9 10</span><br><span class="line">11 12 13 14 15 16 17</span><br><span class="line">18 19 20 21 22 23 24</span><br><span class="line">25 26 27 28 29 30 31</span><br><span class="line"><span class="variable">$cal</span>  2004</span><br><span class="line">若只有一个数字，则被认为是年,并显示相应年的12个月的日历。</span><br></pre></td></tr></table></figure>
+<p><strong>who</strong></p>
+<p>who 显示登陆到系统的所有用户账号、登录位置，登录时间日期<br>who am i 显示当前用户登录时用的用户帐号；<br>whoami显示当前用户有效账号，系统使用此账号决定用户权限。</p>
+<p><strong>mail</strong></p>
+<p>发送E-mail</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ mail &lt;username&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$mail</span> joe</span><br><span class="line">  Subject:meeting</span><br><span class="line">   Don’t’forget about the meeting today!</span><br><span class="line">   &lt;ctrl<span class="_">-d</span>&gt;</span><br><span class="line">   Cc: &lt;enter&gt;</span><br><span class="line"><span class="variable">$mail</span></span><br><span class="line">Mail version 8.1 6/6/93. Type ? <span class="keyword">for</span> <span class="built_in">help</span>.</span><br><span class="line"><span class="string">"/var/spool/mail/joe"</span>: 3 messages 2 new</span><br><span class="line">&gt; U 1 <span class="built_in">test</span>@localhost.local Thu Sep 15 10:02 16/645 “Hello!”</span><br><span class="line">  N 2 <span class="built_in">test</span>@localhost.local Thu Sep 15 10:03 16/644  “Information”</span><br><span class="line">  N 3 <span class="built_in">test</span>@localhost.local Thu Sep 15 10:05 16/644    “Meeting”</span><br><span class="line"> ? t 2   </span><br><span class="line">U  未读的邮件.</span><br><span class="line">N  收到的新邮件.</span><br><span class="line">? 或 &amp;  as the mail subsystem prompt(系统提示符)</span><br></pre></td></tr></table></figure>
+<p>在邮件系统提示符 ? 下可输入的命令：<br>d  删除信息<br>R  回复邮件.<br>q   退出mail平台，保存之前的操作<br>t   显示信息<br>enter  下一个<br>数字n   察看第n个邮件<br>一旦邮件被打开，其将被放在 $HOME/mbox目录中，若想再看这些信息则用：mail –f </p>
+<p>wall</p>
+<p>这个命令将在系统中的所有在线用户的终端上显示信息，主要用于广播系统管理信息。</p>
+<p><strong>write</strong></p>
+<p>若一用户在线，可用write命令发送信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$write</span> &lt;username&gt; </span><br><span class="line"><span class="variable">$write</span> joe</span><br><span class="line"><span class="variable">$write</span> sam</span><br><span class="line">按&lt;ctrl<span class="_">-d</span>&gt; 来结束会话.</span><br><span class="line"></span><br><span class="line">EOF 说明另一个人结束会话</span><br><span class="line">这一方也需按&lt;ctrl<span class="_">-d</span>&gt; 来结束会话</span><br></pre></td></tr></table></figure>
+<p>mesg</p>
+<p>mesg 命令可以决定用户是否接收来自write和 wall 命令发送的消息，但对root用户的发送的消息不起作用.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mesg</span> n 拒绝</span><br><span class="line"><span class="variable">$mesg</span> y 接受</span><br></pre></td></tr></table></figure>
+<p><strong>常用按键</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;backspace&gt;  删除  </span><br><span class="line">&lt;ctrl-c&gt;     中断当前的命令并返回Shell.</span><br><span class="line">&lt;ctrl<span class="_">-d</span>&gt;     中断当前的通信或从文件中退出。</span><br><span class="line">&lt;ctrl-u&gt;     删除整行.</span><br></pre></td></tr></table></figure>
+<p><strong>man</strong></p>
+<p>是一个帮助命令,可以通过这个命令显示需要命令信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">man man </span><br><span class="line">man who</span><br><span class="line">man  -a  who   显示所有手册页</span><br><span class="line">man  -k　keyword　在手册页标题数据库中搜索keyword关键字并显示包含匹配标题的列表。</span><br><span class="line">&lt;Space bar&gt; :每次向后翻一页</span><br><span class="line">&lt;Enter&gt;      :每次向后移动一行</span><br><span class="line">&lt;b&gt; 　:　每次向前翻一页</span><br><span class="line">&lt;f&gt; 　:　每次向后翻一页</span><br><span class="line">&lt;ctrl-c&gt; or q: 退出man 命令.</span><br></pre></td></tr></table></figure>
+<p>手册信息主要包含:<br>NAME : 标题名称<br>SYNOPSIS : 命令的语法描述.<br>DESCRIPTION : 命令可用选项描</p>
+<p>[ ]    :[ ] 内的内容为可选项<br>a | b  :要么为a ,要么为b.<br>{ }    :强制选项</p>
+<h3 id="3-Linux文件系统"><a href="#3-Linux文件系统" class="headerlink" title="3.Linux文件系统"></a>3.Linux文件系统</h3><p><strong>文件的定义</strong></p>
+<p>​        文件是Linux用来存储信息的基本结构， 它是被命名（称为文件名）的、存储在某种媒介（如磁盘、光盘和磁带等）上的一组信息的集合。</p>
+<p><strong>文件的类型</strong></p>
+<p>​        普通文件、目录文件、设备文件三种基本类型</p>
+<p>普通文件</p>
+<p>二进制文件</p>
+<ul>
+<li>以二进制形式存储在电脑中</li>
+<li>用户一般只有通过相应的软件才能将其显示出来</li>
+<li>一般是可执行程序、图形、图像、声音等</li>
+</ul>
+<p>文本(txt)文件</p>
+<ul>
+<li>以文本的ASCII码形式存储在电脑中，其内容都是可读字符。</li>
+<li>以“行”为基本结构的信息组织和存储方式</li>
+</ul>
+<p>目录文件</p>
+<ul>
+<li>目录文件存储一组相关文件的位置、大小等与文件有关的信息，但它不包含具体的文件内容，因而和常规文件相比占用的磁盘空间很小。</li>
+<li>在目录文件中的每一项(entry) 主要表示的是一个文件名(或子目录名)以及文件的索引节点号(i-node number )。 </li>
+<li>一个文件的索引节点能够指向该文件内容所在的数据块的位置，除此之外它还记录了该文件的属性。目录文件就是通过 i-node表与文件之间建立对应关系的。</li>
+<li>在Linux也可以把目录文件看作是将文件的名称和它的索引节点号结合在一起的一张表</li>
+<li>访问一个文件或子目录时，首先访问他所在的目录，找到该文件的i-node值，然后再查找i-node 表找出相应的i-node项（i-node entry），从而找到了相应的数据 。</li>
+</ul>
+<p>设备文件</p>
+<p>Linux系统把I/O设备都看成是文件。用户使用I/O设备就像是使用一般文件，不必了解I/O设备的细节。<br>有两种设备文件：</p>
+<ul>
+<li>块设备：<br>以块为单位进行随机存取。<br>常见块设备：软盘、光盘、硬盘。</li>
+<li>字符设备：<br>以单个字符为单位进行顺序存取。<br>常见的字符设备：打印机、终端、键盘、鼠标</li>
+</ul>
+<p><strong>用户主目录</strong></p>
+<ul>
+<li>用户主目录又称为用户的登录目录或起始目录</li>
+<li>用户每次登录后自动位于其主目录下</li>
+<li>用户主目录由系统管理员在创建帐号时建立，每个合法的用户在文件系统中都有一个唯一的起始目录。默认的主目录位于/home目录下，以该用户名命名。 用户joe：/home/joe   root用户：/root  </li>
+<li>用户的主目录属于用户，用户可以在此目录下进行各种文件操作</li>
+<li>cd 命令可从任何位置返回主目录</li>
+<li>使用echo $HOME可以查看自己的主目录</li>
+</ul>
+<p><strong>绝对路径和相对路径</strong></p>
+<ul>
+<li>路径名分为两种：绝对路径和相对路径</li>
+<li>绝对路径指出从根目录到此文件的路径，一般来说由/符号开始。</li>
+<li>相对路径指明从当前目录到此文件的路径，相对路径名以下列方式开始。</li>
+<li>“.”，代表当前目录</li>
+<li>“..”，代表当前目录的父目录</li>
+</ul>
+<p><strong>链接文件</strong></p>
+<p>目录中每一对文件名称和索引节点号称为一个链接 </p>
+<ul>
+<li>硬链接（ Hard Link）<ul>
+<li>原文件名和链接文件名都指向相同的物理位址。 (i-node number )</li>
+<li>如果删除硬链接文件的源文件，硬链接文件仍然存在，而且保留了原有的内容 </li>
+<li>不允许普通用户对目录建立硬链接；硬链接不能跨越文件系统（不能跨越不同的分区）</li>
+</ul>
+</li>
+<li>符号链接（ Symbolic Link）<ul>
+<li>它的内容是它所链接的文件的路径名</li>
+<li>每个链接文件都有各自的索引节点号。</li>
+<li>由于存放的是源文件的路径名，因而如果删除符号链接文件的源文件，符号链接文件将无法找到原有资料。</li>
+<li>可用于链接目录，且符号链接能够跨越文件系统</li>
+</ul>
+</li>
+</ul>
+<p><strong>文件系统的结构</strong></p>
+<ul>
+<li>文件系统指文件存在的物理空间</li>
+<li>Linux 文件系统由一组普通文件、目录文件、设备文件和符号链接组成。</li>
+<li>在 linux 中支持多种不同的文件系统</li>
+<li>Linux 将分属不同分区的、单独的文件系统整理形成一个系统的，总的目录层次结构，也即树状层次结构。</li>
+<li>树状层次结构使得 Linux核心的其它部分及系统中运行的程序会看到统一的文件系统，为用户提供了一种组织、检索和管理信息的便捷、高效的方法。</li>
+<li>Linux 通过挂接（mount）一个文件系统将该新文件系统加入它的文件系统树中。    </li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9wbvfbxz4j30k00f0ta4.jpg" alt="image-20191214162420847" style="zoom:50%;"></p>
+<p><strong>cd</strong></p>
+<p>改变当前工作目录(Change Directory)</p>
+<p>cd [directory]</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>   无论你当前在何处，都返回到登陆目录下；</span><br><span class="line"><span class="built_in">cd</span> ~  与<span class="built_in">cd</span>意义相同；</span><br><span class="line"><span class="built_in">cd</span> .. 到上一级目录，也即父目录。</span><br><span class="line">例子：假设以用户<span class="built_in">test</span>的身份登陆系统,<span class="built_in">test</span>用户的主目录为/home/<span class="built_in">test</span>。 </span><br><span class="line">   $ <span class="built_in">cd</span> /home/<span class="built_in">test</span>/document</span><br><span class="line">   $ <span class="built_in">cd</span>             回到<span class="built_in">test</span>用户的主目录              </span><br><span class="line">   $ <span class="built_in">cd</span> ~</span><br><span class="line">   $ <span class="built_in">pwd</span></span><br><span class="line">   	/home/<span class="built_in">test</span></span><br><span class="line">   $ <span class="built_in">cd</span> document    进入/home/<span class="built_in">test</span>/document</span><br><span class="line">   $ <span class="built_in">cd</span> ../..       进入/home(父目录的父目录)</span><br><span class="line">   $ <span class="built_in">pwd</span></span><br><span class="line">   	/home</span><br></pre></td></tr></table></figure>
+<p><strong>touch</strong></p>
+<p>能够以当前时间创建文件或更新已有文件的时间戳。若所指定文件不存在，则自动建立指定文件(大小为零)。</p>
+<p>touch [-t] [YY] [MMDDhhmm] filename</p>
+<p>-t：设定时间戳。</p>
+<p>YY指年份， MM指月份，DD指该月的哪一天， hh和mm分别代表小时和分钟 </p>
+<p>若要输入时间格式，至少要输入MMDDhhmm，也就是月、日、小时与分。</p>
+<p>如果没有输入时间，则默认为当前时间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">例子：</span><br><span class="line"><span class="variable">$touch</span> file1</span><br><span class="line">将文件file1的时间记录改为目前的时间，若file1不存在，则创建file1 </span><br><span class="line"><span class="variable">$touch</span> file2 file3</span><br><span class="line">针对两个文件file2 和file3。 </span><br><span class="line"><span class="variable">$touch</span> –t  199801151110 file1 </span><br><span class="line">将file1的时间记录改为1998年1月15日11点10分。</span><br><span class="line"><span class="variable">$touch</span> –t  01151110 file1</span><br><span class="line">将file1的时间记录改为1月15日11点10分。</span><br></pre></td></tr></table></figure>
+<p><strong>cp</strong></p>
+<p>复制文件命令：</p>
+<p>cp [<em>-options</em>] <em>src_file</em> <em>dst_file</em></p>
+<p>参数:</p>
+<p>src_file:源文件或目录</p>
+<p>dst_file:目的文件或目录</p>
+<p> 如果目的文件是一个目录，那么将源文件拷贝到目的目录下</p>
+<p>拷贝时，既可以使用相对路径，也可以使用绝对路径。</p>
+<p>选项：</p>
+<p>-i：在覆盖文件之前提示用户,由用户确认。</p>
+<p>-R或-r：递归复制目录，即复制相应的目录及其所有子目录</p>
+<p><strong>mv</strong></p>
+<p>mv命令用于对文件进行名称更改或路径迁移。 </p>
+<p>对文件的迁移，可以是单纯的迁移；也可以是迁移兼更改文件名。</p>
+<p>格式：</p>
+<p>  mv [<em>-options</em>] <em>src_file</em>  <em>dst_file</em></p>
+<p>  -f  强制执行。直接覆盖已存在的目的文件，不显示覆盖前的询问讯息。 </p>
+<p>  -i  交互执行。当已存在同名的目标文件名时，在覆盖之前给出提示，由用户确认后才予以覆盖。</p>
+<p><strong>rm</strong></p>
+<p>删除文件或目录</p>
+<p>格式：</p>
+<p>  rm [-options] files</p>
+<p>选项：</p>
+<p>  -f：强制执行。</p>
+<p>  -i：交互执行，在执行删除前提示确认。</p>
+<p>  -R或r：递归的删除目录</p>
+<p>files可以是一个文件，也可以多个文件。当要删除多个文件时，多个文件名之间要用空格隔开。</p>
+<p><strong>mkdir</strong></p>
+<p>该命令能够创建一个或多个子目录，每个新创建的目录都包含两个标准项 <strong>.</strong> (dot) 和 <strong>..</strong> (dot-dot).</p>
+<p>创建新的目录时，对其父目录必须有写权限。</p>
+<p>格式：</p>
+<p>  mkdir [-options] DIRECTORY</p>
+<p>选项：</p>
+<p>  -p:parent的缩写。自动建立所需路径中不存在的上层目录。</p>
+<p>  -m:建立指定权限的目录。   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mkdir</span> <span class="built_in">test</span>     </span><br><span class="line"><span class="variable">$mkdir</span> -p test1/test2/test3</span><br><span class="line"><span class="variable">$mkdir</span> -m 711 testqq   </span><br><span class="line">$ ls -l <span class="built_in">test</span>* </span><br><span class="line">drwxrwxr-x   2 <span class="built_in">test</span>   <span class="built_in">test</span>    4096 Feb  6 20:47 <span class="built_in">test</span>/ </span><br><span class="line">drwxrwxr-x   3 <span class="built_in">test</span>   <span class="built_in">test</span>    4096 Feb  6 20:48 test1/ </span><br><span class="line">drwx--x--x   2 <span class="built_in">test</span>   <span class="built_in">test</span>    4096 Feb  6 20:48 testqq/</span><br></pre></td></tr></table></figure>
+<p><strong>rmdir</strong></p>
+<p>用于删除目录</p>
+<p>当使用rmdir命令时，要求：</p>
+<ul>
+<li>对该目录的父目录必须有写权限。</li>
+<li>被删除的目录是个空目录，否则只能尝试-p选项</li>
+</ul>
+<p>格式： rmdir [-p] directory</p>
+<p>  -p：多层次的空目录删除。由指定目录的最底层开始，逐层尝试删除空目录，当碰到非空目录时便停止删除的动作。 </p>
+<h3 id="4-Linux文件权限"><a href="#4-Linux文件权限" class="headerlink" title="4.Linux文件权限"></a>4.Linux文件权限</h3><p><strong>Linux系统中用户和组的概念</strong></p>
+<ul>
+<li>多用户、多任务的操作系统决定了常常会有多人同时使用这部主机工作 </li>
+<li>保证每个人的隐私权—&gt;文件所有者 </li>
+<li>资源共享，团队开发—&gt;文件所属用户组<br>Class 1：student1, student2, student3<br>Class 2：unit1, unit2, unit3<br>Teacher：察看两个组的进度</li>
+<li>Linux中每个用户都至少属于一个用户组，以保证对一个用户组中的所有用户进行集中管理</li>
+</ul>
+<p><strong>Linux系统中的用户类型</strong></p>
+<ul>
+<li>文件所有者：能够设定同组用户和其他用户对该文件的访问权限。一般来说是文件的创建者。</li>
+<li>同组用户：具有相同性质的所有用户,被系统管理员分在同一组。文件所有者或系统管理员可将文件的权限赋予组内的其它用户。</li>
+<li>其它用户：文件所有者或系统管理员还可以将文件的访问权赋予系统中所有其它的用户。这样,系统中每一位用户可能都能访问你的某一文件或目录。</li>
+</ul>
+<p><strong>用户类型和权限的表示方法</strong></p>
+<p>在设定文件权限时，用字符表示用户类型：<br>    u     文件的所有者<br>    g     同组用户<br>    o　　 其它用户<br>    a    　all=ugo,即所有用户<br>对文件和目录的三种权限<br>    读（r）<br>    写（w）<br>    执行（x）</p>
+<p><strong>chmod chown</strong></p>
+<p>chown [-options] user[：group] filelist  </p>
+<p>仅用于系统管理员对文件和用户的管理</p>
+<p>选项： </p>
+<p> -R：递归改变目录及其内容的所属用户或用户组</p>
+<p>chmod [-options] xyz [filelist]</p>
+<p>用来改变文件或目录的权限</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9wcovjvaoj30eq03y0sy.jpg" alt="image-20191214165244103"></p>
+<p>选项：<br>-c：只有在文件权限确实改变时才进行详细说明；<br>-f：不打印“权限不能改变”之类的文件错误信息；<br>-R：递归改变目录及其内容的权限；<br>-v：详细说明权限的变化。</p>
+<h3 id="5-进程管理"><a href="#5-进程管理" class="headerlink" title="5.进程管理"></a>5.进程管理</h3><p><strong>进程</strong></p>
+<p>一个进程是一个程序的一次执行的过程</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/01/Xunsearch搭建本地搜索引擎/" rel="next" title="Xunsearch搭建本地搜索引擎">
+                <i class="fa fa-chevron-left"></i> Xunsearch搭建本地搜索引擎
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">加倍努力！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
