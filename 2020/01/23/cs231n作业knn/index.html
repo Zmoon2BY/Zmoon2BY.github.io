@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="cs231n,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="寒假看了几节Stanford的cs231n，把作业做一下 第一个assignment分为五部分，knn、svm、softmax、neural netork、features。一个作业的工作量赶上一个学期的机器学习实验了。 完成作业的同时，认真阅读实验给出的其他代码。">
+<meta name="keywords" content="cs231n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n作业knn">
+<meta property="og:url" content="http://yoursite.com/2020/01/23/cs231n作业knn/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="寒假看了几节Stanford的cs231n，把作业做一下 第一个assignment分为五部分，knn、svm、softmax、neural netork、features。一个作业的工作量赶上一个学期的机器学习实验了。 完成作业的同时，认真阅读实验给出的其他代码。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-23T15:02:19.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n作业knn">
+<meta name="twitter:description" content="寒假看了几节Stanford的cs231n，把作业做一下 第一个assignment分为五部分，knn、svm、softmax、neural netork、features。一个作业的工作量赶上一个学期的机器学习实验了。 完成作业的同时，认真阅读实验给出的其他代码。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/23/cs231n作业knn/">
+
+
+
+
+
+  <title>cs231n作业knn | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/23/cs231n作业knn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cs231n作业knn</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T19:54:48+08:00">
+                2020-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>寒假看了几节Stanford的cs231n，把作业做一下</p>
+<p>第一个assignment分为五部分，knn、svm、softmax、neural netork、features。一个作业的工作量赶上一个学期的机器学习实验了。</p>
+<p>完成作业的同时，认真阅读实验给出的其他代码。</p>
+<a id="more"></a>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>anaconda天下第一！终端执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n cs231n python=3.7 anaconda</span><br></pre></td></tr></table></figure>
+<p>之后在终端之中执行如下指令进行进出虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate cs231n <span class="comment">#进入虚拟环境</span></span><br><span class="line">conda deactivate <span class="comment">#退出</span></span><br></pre></td></tr></table></figure>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><h4 id="模型构建"><a href="#模型构建" class="headerlink" title="模型构建"></a>模型构建</h4><p>根据cs231n课堂notes中提到</p>
+<blockquote>
+<p>Notice that all classifiers we will build satisfy this one common API: they have a train(X,y) function that takes the data and the labels to learn from. Internally, the class should build some kind of model of the labels and how they can be predicted from the data. And then there is a predict(X) function, which takes new data and predicts the labels. </p>
+</blockquote>
+<p>模型构建可以分为训练过程和预测过程两部分</p>
+<p>打开cs231n/classifiers/k_nearest_neighbor.py，对其中的内容进行修改</p>
+<p>训练过程不需要作出修改，knn的训练过程就是把训练集存下来</p>
+<p>预测过程中分为两个部分</p>
+<ul>
+<li>计算test集和train集之间的两个样本之间的距离，作业采用的是L2</li>
+<li>选出前k小距离并对对应样本进行投票预测</li>
+</ul>
+<p>计算dists的方式有三种，两重循环、一重循环、矩阵操作，难度层层递进</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_distances_two_loops</span><span class="params">(self, X)</span>:</span></span><br><span class="line">      num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">      num_train = self.X_train.shape[<span class="number">0</span>]</span><br><span class="line">      dists = np.zeros((num_test, num_train))</span><br><span class="line">      <span class="keyword">for</span> i <span class="keyword">in</span> range(num_test):</span><br><span class="line">          <span class="keyword">for</span> j <span class="keyword">in</span> range(num_train):</span><br><span class="line">              dists[i,j] = np.sqrt(np.sum((X[i,:] - self.X_train[j,:])**<span class="number">2</span>))</span><br><span class="line">      <span class="keyword">return</span> dists</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">compute_distances_one_loop</span><span class="params">(self, X)</span>:</span></span><br><span class="line">      num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">      num_train = self.X_train.shape[<span class="number">0</span>]</span><br><span class="line">      dists = np.zeros((num_test, num_train))</span><br><span class="line">      <span class="keyword">for</span> i <span class="keyword">in</span> range(num_test):</span><br><span class="line">          dists[i,:] = np.sqrt(np.sum((self.X_train - X[i,:])**<span class="number">2</span>,axis = <span class="number">1</span>))</span><br><span class="line">      <span class="keyword">return</span> dists</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">compute_distances_no_loops</span><span class="params">(self, X)</span>:</span></span><br><span class="line">      num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">      num_train = self.X_train.shape[<span class="number">0</span>]</span><br><span class="line">      dists = np.zeros((num_test, num_train))</span><br><span class="line">      dists += np.sum(self.X_train ** <span class="number">2</span>, axis=<span class="number">1</span>).reshape(<span class="number">1</span>, num_train)</span><br><span class="line">      dists += np.sum(X ** <span class="number">2</span>, axis=<span class="number">1</span>).reshape(num_test, <span class="number">1</span>) <span class="comment"># reshape for broadcasting</span></span><br><span class="line">      dists -= <span class="number">2</span> * np.dot(X, self.X_train.T)</span><br><span class="line">      dists = np.sqrt(dists)</span><br><span class="line">      <span class="keyword">return</span> dists</span><br></pre></td></tr></table></figure>
+<p>值得注意的是2019年春季的assignment对于较难的部分会给出一个hint，比如对于不使用循环的做法</p>
+<blockquote>
+<p>HINT: Try to formulate the l2 distance using matrix multiplication and two broadcast sums.</p>
+</blockquote>
+<p>另外，在github上有一个极高star的作业，其中在compute_distances_one_loop之中采用了另一种实现方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dists[i] = np.sqrt(np.sum(np.square(self.X_train - X[i]), axis = <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>调用np.square()函数的过程相比于**2的方式来说非常慢，大概有个3倍？会导致之后的时间比较结果出现问题</p>
+<p>预测标签方面，自己的实现非常的菜，参考了大佬的做法，极其优雅</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict_labels</span><span class="params">(self, dists, k=<span class="number">1</span>)</span>:</span></span><br><span class="line">    num_test = dists.shape[<span class="number">0</span>]</span><br><span class="line">    y_pred = np.zeros(num_test)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_test):</span><br><span class="line">        closest_y = []</span><br><span class="line">        closest_y = self.y_train[np.argsort(dists[i])[<span class="number">0</span>:k]]</span><br><span class="line">        y_pred[i] = np.bincount(closest_y).argmax()</span><br><span class="line">    <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
+<p>原因在于我对于numpy的一些操作不是很了解，近期会仔细看一下numpy的文档（还有matplotlib、pandas）</p>
+<p>至此，模型的构建过程结束</p>
+<h4 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h4><p>数据加载的过程设置作业的TA已经把代码写好了，可以欣赏一下优雅的代码在data_utils.py之中</p>
+<p>但是运行knn.ipynb第一个单元格出现报错，需要打开cs231n/data_utils.py修改如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># from scipy.misc import imread</span></span><br><span class="line"><span class="keyword">from</span> imageio <span class="keyword">import</span> imread</span><br></pre></td></tr></table></figure>
+<h4 id="训练与预测"><a href="#训练与预测" class="headerlink" title="训练与预测"></a>训练与预测</h4><p>在knn.ipynb之中大部分的代码已经给出了，在此就不贴代码了，其中有很多值得学习的地方</p>
+<blockquote>
+<p>As a sanity check, we print out the size of the training and test data.</p>
+</blockquote>
+<p>输出训练集的测试集的shape作为检查载入数据的是否正确的方式</p>
+<p>计算函数执行时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_function</span><span class="params">(f, *args)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Call a function f with args and return the time (in seconds) that it took to execute.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">import</span> time</span><br><span class="line">    tic = time.time()</span><br><span class="line">    f(*args)</span><br><span class="line">    toc = time.time()</span><br><span class="line">    <span class="keyword">return</span> toc - tic</span><br></pre></td></tr></table></figure>
+<p>关于超参数k的选择，作业用的是交叉验证的方式，要求对其进行实现，原理不难</p>
+<p>关于超参数的调整问题，在notes之中有较为详细的描述</p>
+<blockquote>
+<p>In practice. In practice, people prefer to avoid cross-validation in favor of having a single validation split, since cross-validation can be computationally expensive. The splits people tend to use is between 50%-90% of the training data for training and rest for validation. However, this depends on multiple factors: For example if the number of hyperparameters is large you may prefer to use bigger validation splits. If the number of examples in the validation set is small (perhaps only a few hundred or so), it is safer to use cross-validation. Typical number of folds you can see in practice would be 3-fold, 5-fold or 10-fold cross- validation.</p>
+</blockquote>
+<p>之后，会在做完所有作业之后上传至github</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cs231n/" rel="tag"># cs231n</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/18/大三上学期总结/" rel="next" title="大三上学期总结">
+                <i class="fa fa-chevron-left"></i> 大三上学期总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">加倍努力！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
