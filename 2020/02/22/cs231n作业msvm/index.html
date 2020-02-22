@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="cs231n,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="cs231n关于多分类SVM这一部分的作业一直没有写总结，每次写完一个小作业的收获都是极大的">
+<meta name="keywords" content="cs231n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n作业msvm">
+<meta property="og:url" content="http://yoursite.com/2020/02/22/cs231n作业msvm/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="cs231n关于多分类SVM这一部分的作业一直没有写总结，每次写完一个小作业的收获都是极大的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-22T10:12:32.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n作业msvm">
+<meta name="twitter:description" content="cs231n关于多分类SVM这一部分的作业一直没有写总结，每次写完一个小作业的收获都是极大的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/22/cs231n作业msvm/">
+
+
+
+
+
+  <title>cs231n作业msvm | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/22/cs231n作业msvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cs231n作业msvm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-22T17:13:01+08:00">
+                2020-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>cs231n关于多分类SVM这一部分的作业一直没有写总结，每次写完一个小作业的收获都是极大的</p>
+<a id="more"></a>
+<p>Stanford这样的神校设计的作业才是真真正正的引导学生带着问题去思考去查阅笔记和论文</p>
+<p>仔细实现一遍多分类SVM的流程，包括推导梯度等等</p>
+<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><p>此过程助教已经给出</p>
+<h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><p>首先把图像数据拉伸成一行</p>
+<p>计算均值，并进行中心化处理</p>
+<p>bias trick（代码注释）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Preprocessing: reshape the image data into rows</span></span><br><span class="line">X_train = np.reshape(X_train, (X_train.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line">X_val = np.reshape(X_val, (X_val.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line">X_test = np.reshape(X_test, (X_test.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line">X_dev = np.reshape(X_dev, (X_dev.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line"><span class="comment"># Preprocessing: subtract the mean image</span></span><br><span class="line"><span class="comment"># first: compute the image mean based on the training data</span></span><br><span class="line">mean_image = np.mean(X_train, axis=<span class="number">0</span>)</span><br><span class="line">print(mean_image[:<span class="number">10</span>]) <span class="comment"># print a few of the elements</span></span><br><span class="line">plt.figure(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line">plt.imshow(mean_image.reshape((<span class="number">32</span>,<span class="number">32</span>,<span class="number">3</span>)).astype(<span class="string">'uint8'</span>)) <span class="comment"># visualize the mean image</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># second: subtract the mean image from train and test data</span></span><br><span class="line">X_train -= mean_image</span><br><span class="line">X_val -= mean_image</span><br><span class="line">X_test -= mean_image</span><br><span class="line">X_dev -= mean_image</span><br><span class="line"></span><br><span class="line"><span class="comment"># third: append the bias dimension of ones (i.e. bias trick) so that our SVM</span></span><br><span class="line"><span class="comment"># only has to worry about optimizing a single weight matrix W.</span></span><br><span class="line">X_train = np.hstack([X_train, np.ones((X_train.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line">X_val = np.hstack([X_val, np.ones((X_val.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line">X_test = np.hstack([X_test, np.ones((X_test.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line">X_dev = np.hstack([X_dev, np.ones((X_dev.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br></pre></td></tr></table></figure>
+<h3 id="模型构建"><a href="#模型构建" class="headerlink" title="模型构建"></a>模型构建</h3><p>SVM与softmax都是在线性分类器这一节的内容，按照笔记中的描述他们的score function是一样的，不同的是loss function，在实现过程中，设计了一个LinearClassifier，而SVM与softmax则是采用了不同的loss function，结合笔记再阅读源码可以发现他们之间的关系，在代码中添加了大量的注释，整个过程清晰明了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearClassifier</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.W = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y, learning_rate=<span class="number">1e-3</span>, reg=<span class="number">1e-5</span>, num_iters=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">              batch_size=<span class="number">200</span>, verbose=False)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Train this linear classifier using stochastic gradient descent.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Inputs:</span></span><br><span class="line"><span class="string">        - X: A numpy array of shape (N, D) containing training data; there are N</span></span><br><span class="line"><span class="string">          training samples each of dimension D.</span></span><br><span class="line"><span class="string">        - y: A numpy array of shape (N,) containing training labels; y[i] = c</span></span><br><span class="line"><span class="string">          means that X[i] has label 0 &lt;= c &lt; C for C classes.</span></span><br><span class="line"><span class="string">        - learning_rate: (float) learning rate for optimization.</span></span><br><span class="line"><span class="string">        - reg: (float) regularization strength.</span></span><br><span class="line"><span class="string">        - num_iters: (integer) number of steps to take when optimizing</span></span><br><span class="line"><span class="string">        - batch_size: (integer) number of training examples to use at each step.</span></span><br><span class="line"><span class="string">        - verbose: (boolean) If true, print progress during optimization.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Outputs:</span></span><br><span class="line"><span class="string">        A list containing the value of the loss function at each training iteration.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        num_train, dim = X.shape</span><br><span class="line">        num_classes = np.max(y) + <span class="number">1</span> <span class="comment"># assume y takes values 0...K-1 where K is number of classes</span></span><br><span class="line">        <span class="keyword">if</span> self.W <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># lazily initialize W</span></span><br><span class="line">            self.W = <span class="number">0.001</span> * np.random.randn(dim, num_classes)</span><br><span class="line">        <span class="comment"># Run stochastic gradient descent to optimize W</span></span><br><span class="line">        loss_history = []</span><br><span class="line">        <span class="keyword">for</span> it <span class="keyword">in</span> range(num_iters):</span><br><span class="line">            X_batch = <span class="literal">None</span></span><br><span class="line">            y_batch = <span class="literal">None</span></span><br><span class="line">            batch_index = np.random.choice(num_train, batch_size, replace = <span class="literal">True</span>)</span><br><span class="line">            X_batch = X[batch_index]</span><br><span class="line">            y_batch = y[batch_index]</span><br><span class="line">            <span class="comment"># evaluate loss and gradient</span></span><br><span class="line">            loss, grad = self.loss(X_batch, y_batch, reg)</span><br><span class="line">            loss_history.append(loss)</span><br><span class="line">            self.W -= learning_rate * grad</span><br><span class="line">            <span class="keyword">if</span> verbose <span class="keyword">and</span> it % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">'iteration %d / %d: loss %f'</span> % (it, num_iters, loss))</span><br><span class="line">        <span class="keyword">return</span> loss_history</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Use the trained weights of this linear classifier to predict labels for</span></span><br><span class="line"><span class="string">        data points.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Inputs:</span></span><br><span class="line"><span class="string">        - X: A numpy array of shape (N, D) containing training data; there are N</span></span><br><span class="line"><span class="string">          training samples each of dimension D.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">        - y_pred: Predicted labels for the data in X. y_pred is a 1-dimensional</span></span><br><span class="line"><span class="string">          array of length N, and each element is an integer giving the predicted</span></span><br><span class="line"><span class="string">          class.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        y_pred = np.zeros(X.shape[<span class="number">0</span>])</span><br><span class="line">        scores = X.dot(self.W)</span><br><span class="line">        y_pred = np.argmax(scores,axis=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> y_pred</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X_batch, y_batch, reg)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Compute the loss function and its derivative.</span></span><br><span class="line"><span class="string">        Subclasses will override this.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Inputs:</span></span><br><span class="line"><span class="string">        - X_batch: A numpy array of shape (N, D) containing a minibatch of N</span></span><br><span class="line"><span class="string">          data points; each point has dimension D.</span></span><br><span class="line"><span class="string">        - y_batch: A numpy array of shape (N,) containing labels for the minibatch.</span></span><br><span class="line"><span class="string">        - reg: (float) regularization strength.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Returns: A tuple containing:</span></span><br><span class="line"><span class="string">        - loss as a single float</span></span><br><span class="line"><span class="string">        - gradient with respect to self.W; an array of the same shape as W</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearSVM</span><span class="params">(LinearClassifier)</span>:</span></span><br><span class="line">    <span class="string">""" A subclass that uses the Multiclass SVM loss function """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X_batch, y_batch, reg)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> svm_loss_vectorized(self.W, X_batch, y_batch, reg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Softmax</span><span class="params">(LinearClassifier)</span>:</span></span><br><span class="line">    <span class="string">""" A subclass that uses the Softmax + Cross-entropy loss function """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X_batch, y_batch, reg)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> softmax_loss_vectorized(self.W, X_batch, y_batch, reg)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Hint: Use np.random.choice to generate indices. Sampling with replacement is faster than sampling without replacement.</p>
+</blockquote>
+<p>之后收获最大的就是loss function的向量化计算形式了，在计算梯度时采用了一个系数矩阵作为中间结果，极大的简化了运算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Structured SVM loss function, vectorized implementation.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs and outputs are the same as svm_loss_naive.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    loss = <span class="number">0.0</span></span><br><span class="line">    dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></span><br><span class="line">    scores = X.dot(W)</span><br><span class="line">    num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">    num_class = W.shape[<span class="number">1</span>]</span><br><span class="line">    correct_class_score = scores[np.arange(num_train),y].reshape((<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line">    margins = np.fmax(<span class="number">0</span>,scores - correct_class_score + <span class="number">1</span>)</span><br><span class="line">    margins[np.arange(num_train),y] = <span class="number">0</span></span><br><span class="line">    loss = np.sum(margins) / num_train + <span class="number">0.5</span> * reg * np.sum(W * W)</span><br><span class="line">    coeff_mat = np.zeros((num_train,num_class))</span><br><span class="line">    coeff_mat[margins &gt; <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    coeff_mat[np.arange(num_train),y] -= np.sum(coeff_mat,axis=<span class="number">1</span>)</span><br><span class="line">    dW = (X.T).dot(coeff_mat)/num_train</span><br><span class="line">    dW += reg * W</span><br><span class="line">    <span class="keyword">return</span> loss, dW</span><br></pre></td></tr></table></figure>
+<p>其余的部分相对来说比较简单就不再进行记录了，不想在这么好的实验上画蛇添足，知乎上有些博主完全就是把课程笔记、课件、实验三者的内容复制粘贴进行整合一遍，我认为这样的工作对自己来说是没有意义的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cs231n/" rel="tag"># cs231n</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/17/图论LCA与树的直径/" rel="next" title="图论LCA与树的直径">
+                <i class="fa fa-chevron-left"></i> 图论LCA与树的直径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">加倍努力！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
