@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="华为,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为了便于队友理解代码，写一下思路">
+<meta name="keywords" content="华为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华为codecraft2020初赛">
+<meta property="og:url" content="http://yoursite.com/2020/04/16/华为codecraft2020初赛/index.html">
+<meta property="og:site_name" content="养生划水">
+<meta property="og:description" content="为了便于队友理解代码，写一下思路">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-16T10:13:39.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="华为codecraft2020初赛">
+<meta name="twitter:description" content="为了便于队友理解代码，写一下思路">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/16/华为codecraft2020初赛/">
+
+
+
+
+
+  <title>华为codecraft2020初赛 | 养生划水</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">养生划水</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/华为codecraft2020初赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="apprecieta">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="养生划水">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">华为codecraft2020初赛</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-16T16:58:14+08:00">
+                2020-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为了便于队友理解代码，写一下思路</p>
+<a id="more"></a>
+<h3 id="建图"><a href="#建图" class="headerlink" title="建图"></a>建图</h3><p>题目要求：</p>
+<blockquote>
+<p>输出循环转账路径要按照指定排序策略进行排序：每条循环转账中，ID（ID转为无符号整数后）最小的第一个输出；总体按照循环转账路径长度升序排序；同一级别的路径长度下循环转账账号ID序列，按照字典序（ID转为无符号整数后）升序排序。</p>
+</blockquote>
+<p>也就是说对于一个环，比如 2 1 3 4 这样一个环是不满足要求的，应当为1 3 4 2</p>
+<p>首先对于路径/环的存储定义如下结构体，len表示长度，cyc存取环上的点的ID，然后重载运算符就是按照环的要求的一个排序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cycle</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> len,cyc[<span class="number">7</span>];</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> cycle&amp; t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(len==t.len)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(cyc[i]!=t.cyc[i])<span class="keyword">return</span> cyc[i]&lt;t.cyc[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len&lt;t.len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>存图方式采用邻接表，因为网友试出来了出度入度都不大于50，所以可以开一个静态数组来存图，之前是采用的vector</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*静态数组*/</span></span><br><span class="line"><span class="keyword">int</span> g[N][<span class="number">52</span>];     <span class="comment">//存图</span></span><br><span class="line"><span class="keyword">int</span> gt[N][<span class="number">52</span>];     <span class="comment">//存反图</span></span><br><span class="line"><span class="keyword">int</span> h[N];</span><br><span class="line"><span class="keyword">int</span> ht[N];</span><br><span class="line">g[u][h[u]++]=v;</span><br><span class="line">gt[v][ht[v]++]=u;</span><br><span class="line"><span class="comment">/*vector*/</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; g;     <span class="comment">//存图</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; gt;     <span class="comment">//存反图</span></span><br><span class="line">g[u].push_back(v);</span><br><span class="line">gt[v].push_back(u);</span><br></pre></td></tr></table></figure>
+<p>除此之外，题目描述说ID为int范围内的正整数，为了能够使用邻接表存图所以要做一步映射操作，all是全部的点，s为输入的边起点，t为输入的边的终点，对all排序去重，进行映射</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">all=s;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:t)all.push_back(x);</span><br><span class="line">sort(all.begin(),all.end());</span><br><span class="line">all.erase(unique(all.begin(),all.end()),all.end());</span><br><span class="line">num=<span class="number">0</span>;</span><br><span class="line">mp_small_big=all; </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span>&amp; x:all)&#123;</span><br><span class="line">  mp_big_small[x]=num++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>建完图之后有一个剪枝操作可以避免一些无意义的搜索，tarjan算法是一个求解强连通分量的算法，强连通分量是一个任意两点均有互相可达路径的极大子图，所以长度为3-7的环一定在同一个强连通分量里，并且这个强连通分量的大小一定大于3</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    dfn[u]=low[u]=++idx;</span><br><span class="line">    sys.push(u);</span><br><span class="line">    vis[u]=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;h[u];i++)&#123;</span><br><span class="line">        v=g[u][i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])</span><br><span class="line">        &#123;</span><br><span class="line">            tarjan(v);</span><br><span class="line">            low[u]=min(low[v],low[u]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(vis[v])&#123;</span><br><span class="line">            low[u]=min(low[u],dfn[v]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(dfn[u]==low[u])<span class="comment">//找到一个强连通分量</span></span><br><span class="line">    &#123;</span><br><span class="line">        cnt++;<span class="comment">//强连通分量数</span></span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            v=sys.top();</span><br><span class="line">            sys.pop();</span><br><span class="line">            vis[v]=<span class="number">0</span>;</span><br><span class="line">            belong[v]=cnt;<span class="comment">//同一个强连通分量的点的belong[]值相同，以此来判断是不是在同一个强连通分量里</span></span><br><span class="line">        &#125;<span class="keyword">while</span>(v!=u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>dfn和low是tarjan算法执行过程的一个标记，可以把tarjan当作一个“黑盒子”，就是为了减少不必要的搜索</p>
+<h3 id="搜索答案"><a href="#搜索答案" class="headerlink" title="搜索答案"></a>搜索答案</h3><p>首先，符合题目要求的环一定是它的环的最小ID在第一位，比如1 3 4 2</p>
+<p>一种比较简单的思路就是先对点的邻接表排序，在找环的时候二分</p>
+<p>比如在找以2在第一位的环，那么找到的环上的其他点的ID都大于2</p>
+<p>比如2 1 3 4就不合要求，因为1是小于2的</p>
+<p>如果2的邻接表 g[2]={10,1,9} 可以对它进行排序 g[2]={1,9,10} 然后二分g[2]中第一个大于2的点，直接从9开始搜索其他点，这样的复杂度比直接遍历邻接表要更优</p>
+<p>但是我又发现了一种思路可以不用二分</p>
+<p>把邻接表按照从大到小排序，比如g[2]={10,9,1}这样就可以直接遍历了，到1这个位置停止就可以不需要再进行二分，也就是说这样得到的答案与题目要求的答案是相反的，无需排序，reverse一下就可以</p>
+<p>二分的话相当于</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> root=<span class="number">0</span>;root&lt;num;root++)&#123;</span><br><span class="line">	  <span class="keyword">int</span> i=g[root]中第一个大于root的点的下标</span><br><span class="line">    <span class="keyword">for</span>(;i&lt;g[root].size();i++)&#123;</span><br><span class="line">      	<span class="keyword">int</span> u=g[root][i]; <span class="comment">//对应的点</span></span><br><span class="line">      	<span class="keyword">int</span> j=g[u]中第一个大于root的点的下标</span><br><span class="line">        <span class="keyword">for</span>(;j&lt;g[u].size();j++)&#123;</span><br><span class="line">          	<span class="keyword">int</span> v=g[u][j];</span><br><span class="line">          	<span class="keyword">int</span> k=g[v]中第一个大于等于root的点的下标 <span class="comment">//注意这里是大于等于 因为要找长度为3的环了</span></span><br><span class="line">             <span class="keyword">for</span>(;k&lt;g[v].size();k++)&#123;</span><br><span class="line">               	<span class="keyword">int</span> e=g[v][k];</span><br><span class="line">               	<span class="keyword">if</span>(e==root)长度为<span class="number">3</span>的环</span><br><span class="line">                ......同理</span><br><span class="line">             &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从大到小的话</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> root=num<span class="number">-1</span>;root&gt;=<span class="number">0</span>;root--)&#123;<span class="comment">//从大到小</span></span><br><span class="line">  	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;g[root].size()&amp;&amp;g[root][i]&gt;root;i++)&#123;<span class="comment">//从大到小</span></span><br><span class="line">      	<span class="keyword">int</span> u=g[root][i];</span><br><span class="line">      	......同理</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一个优化是反向图寻找路径 比如path[u][root]可以存取从u到root中经过的中间点，当正向搜索到u时可以直接把这些中间点与从root到u的路径进行拼接</p>
+<p>但是存取这样的二维矩阵的空间开销是非常巨大的，毕竟点数已经是1w以上了，1w的平方再加上两点间的路径，所以对于处理一个点root的时候，path[u]存取从u到root中经过的中间点，处理完这个点之后，把root产生的路径全部清除，把空间留给下一个点使用，比如path[u].clear()</p>
+<p>提一下，lower_bound() 是第一个大于等于 upper_bound()是第一个大于</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pre_process_backpath</span><span class="params">(<span class="keyword">int</span> root)</span><span class="comment">//从v到root 经过u 从e到root 经过v u（需要reverse） dfs的时候reverse再排序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//reach=vector&lt;bool&gt; (num);</span></span><br><span class="line">    <span class="keyword">int</span> color=belong[root];</span><br><span class="line">    cycle temp;</span><br><span class="line">    temp.len=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=<span class="number">0</span>;it&lt;ht[root]&amp;&amp;gt[root][it]&gt;root;it++)&#123;</span><br><span class="line">        <span class="keyword">int</span> u=gt[root][it];</span><br><span class="line">        <span class="keyword">if</span>(belong[u]!=color)<span class="keyword">continue</span>;</span><br><span class="line">        curl.push_back(u);<span class="comment">//这里对于从u到root做了一个特殊标记，因为没有中间点</span></span><br><span class="line">        lim[u]=<span class="literal">true</span>;</span><br><span class="line">        temp.cyc[temp.len++]=u;<span class="comment">//中间点为u</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> jt=<span class="number">0</span>;jt&lt;ht[u]&amp;&amp;gt[u][jt]&gt;root;jt++)&#123;</span><br><span class="line">            <span class="keyword">int</span> v=gt[u][jt];</span><br><span class="line">            <span class="keyword">if</span>(belong[v]!=color)<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(!reach[v])curp.push_back(v);<span class="comment">//可达v所以记录一下，便于后续清空</span></span><br><span class="line">            reach[v]=<span class="literal">true</span>;</span><br><span class="line">            path[v].emplace_back(temp);<span class="comment">//root 到 v 经过 u这个中间点</span></span><br><span class="line">            temp.cyc[temp.len++]=v;<span class="comment">//中间点为 u v</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> kt=<span class="number">0</span>;kt&lt;ht[v]&amp;&amp;gt[v][kt]&gt;root;kt++)&#123;</span><br><span class="line">                <span class="keyword">int</span> e=gt[v][kt];</span><br><span class="line">                <span class="keyword">if</span>(belong[e]!=color||e==u)<span class="keyword">continue</span>;<span class="comment">//避免重复，u v不用判重，因为不存在自环</span></span><br><span class="line">                <span class="keyword">if</span>(!reach[e])curp.push_back(e);<span class="comment">//同样到达e记录一下，便于清空</span></span><br><span class="line">                path[e].emplace_back(temp);<span class="comment">// root 到 e 经过 u v 这两个中间点</span></span><br><span class="line">                reach[e]=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            temp.len--;</span><br><span class="line">        &#125;</span><br><span class="line">        temp.len--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curp)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;path[x].size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(path[x][i].len&gt;<span class="number">1</span>)reverse(path[x][i].cyc,path[x][i].cyc+path[x][i].len);</span><br><span class="line">        &#125;<span class="comment">//因为是反向图，所以正向搜索时拼接的应该是 v u，所以要reverse</span></span><br><span class="line">        <span class="keyword">if</span>(!path[x].empty())&#123;</span><br><span class="line">            sort(path[x].begin(),path[x].end());<span class="comment">//排序 结果为从小到大</span></span><br><span class="line">            reverse(path[x].begin(),path[x].end());<span class="comment">//反序 从大到小</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正向搜索过程就是利用了预处理的路径，直接进行拼接，具体不描述了吧，中间的vis数组是为了避免重复走一个点，比如一个“8”字环，这是两个环。</p>
+<p>这一段代码写的很丑，“屎山”，所以叫奥利给</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    reach=<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; (num);</span><br><span class="line">    lim=<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; (num);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=num<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(siz[belong[i]]&gt;=<span class="number">3</span>)&#123;<span class="comment">//强连通分量里节点数大于等于3的</span></span><br><span class="line">            pre_process_backpath(i);<span class="comment">//反着预处理路径</span></span><br><span class="line">            aoligei_cyc(i);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curp)path[x].clear();<span class="comment">//清空路径</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curp)reach[x]=<span class="literal">false</span>;<span class="comment">//清空可达标记</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curl)lim[x]=<span class="literal">false</span>;<span class="comment">//清空可达标记</span></span><br><span class="line">            curp.clear();<span class="comment">//清空</span></span><br><span class="line">            curl.clear();<span class="comment">//清空</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/华为/" rel="tag"># 华为</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/03/AtCoder刷题记录/" rel="next" title="AtCoder刷题记录">
+                <i class="fa fa-chevron-left"></i> AtCoder刷题记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpeg" alt="apprecieta">
+            
+              <p class="site-author-name" itemprop="name">apprecieta</p>
+              <p class="site-description motion-element" itemprop="description">加倍努力！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">apprecieta</span>
+
+  
+</div>
+
+
+
+
+
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
