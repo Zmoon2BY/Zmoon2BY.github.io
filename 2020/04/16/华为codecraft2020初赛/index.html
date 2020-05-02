@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="养生划水">
 <meta property="og:description" content="为了便于队友理解代码，写一下思路">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-16T10:13:39.004Z">
+<meta property="og:updated_time" content="2020-04-22T14:36:14.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="华为codecraft2020初赛">
 <meta name="twitter:description" content="为了便于队友理解代码，写一下思路">
@@ -349,6 +349,8 @@
 <p>正向搜索过程就是利用了预处理的路径，直接进行拼接，具体不描述了吧，中间的vis数组是为了避免重复走一个点，比如一个“8”字环，这是两个环。</p>
 <p>这一段代码写的很丑，“屎山”，所以叫奥利给</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    reach=<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; (num);</span><br><span class="line">    lim=<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; (num);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=num<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(siz[belong[i]]&gt;=<span class="number">3</span>)&#123;<span class="comment">//强连通分量里节点数大于等于3的</span></span><br><span class="line">            pre_process_backpath(i);<span class="comment">//反着预处理路径</span></span><br><span class="line">            aoligei_cyc(i);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curp)path[x].clear();<span class="comment">//清空路径</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curp)reach[x]=<span class="literal">false</span>;<span class="comment">//清空可达标记</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> &amp;x:curl)lim[x]=<span class="literal">false</span>;<span class="comment">//清空可达标记</span></span><br><span class="line">            curp.clear();<span class="comment">//清空</span></span><br><span class="line">            curl.clear();<span class="comment">//清空</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4.17 update</strong></p>
+<p>写完以上内容之后，当晚觉得存路没必要，所以改了一版搜索+剪枝的实现</p>
 
       
     </div>
@@ -388,6 +390,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/02/华为codecraft2020复赛/" rel="prev" title="华为codecraft2020复赛">
+                华为codecraft2020复赛 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,7 +463,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

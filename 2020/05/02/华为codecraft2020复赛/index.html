@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="cs231n,">
+  <meta name="keywords" content="华为,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="趁热打铁，把线性分类器的另一个小实验softmax做了 感觉把svm做了之后，再做softmax简单了很多，可能是因为我们之前在学校上机器学习课程时，课程实验不涉及到优化问题的原因吧，还有也没有要求完全用numpy的矩阵操作进行计算">
-<meta name="keywords" content="cs231n">
+<meta name="description" content="苟进复赛">
+<meta name="keywords" content="华为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs231n作业softmax">
-<meta property="og:url" content="http://yoursite.com/2020/02/22/cs231n作业softmax/index.html">
+<meta property="og:title" content="华为codecraft2020复赛">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/华为codecraft2020复赛/index.html">
 <meta property="og:site_name" content="养生划水">
-<meta property="og:description" content="趁热打铁，把线性分类器的另一个小实验softmax做了 感觉把svm做了之后，再做softmax简单了很多，可能是因为我们之前在学校上机器学习课程时，课程实验不涉及到优化问题的原因吧，还有也没有要求完全用numpy的矩阵操作进行计算">
+<meta property="og:description" content="苟进复赛">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-22T13:14:27.355Z">
+<meta property="og:updated_time" content="2020-05-02T12:29:07.783Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cs231n作业softmax">
-<meta name="twitter:description" content="趁热打铁，把线性分类器的另一个小实验softmax做了 感觉把svm做了之后，再做softmax简单了很多，可能是因为我们之前在学校上机器学习课程时，课程实验不涉及到优化问题的原因吧，还有也没有要求完全用numpy的矩阵操作进行计算">
+<meta name="twitter:title" content="华为codecraft2020复赛">
+<meta name="twitter:description" content="苟进复赛">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/22/cs231n作业softmax/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/02/华为codecraft2020复赛/">
 
 
 
 
 
-  <title>cs231n作业softmax | 养生划水</title>
+  <title>华为codecraft2020复赛 | 养生划水</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/22/cs231n作业softmax/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/02/华为codecraft2020复赛/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="apprecieta">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">cs231n作业softmax</h1>
+          <h1 class="post-title" itemprop="name headline">华为codecraft2020复赛</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-22T21:04:02+08:00">
-                2020-02-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-02T19:23:28+08:00">
+                2020-05-02
               </time>
             
 
@@ -315,12 +315,36 @@
       
 
       
-        <p>趁热打铁，把线性分类器的另一个小实验softmax做了</p>
-<p>感觉把svm做了之后，再做softmax简单了很多，可能是因为我们之前在学校上机器学习课程时，课程实验不涉及到优化问题的原因吧，还有也没有要求完全用numpy的矩阵操作进行计算</p>
+        <p>苟进复赛</p>
 <a id="more"></a>
-<p>整个模型的构建过程与SVM是一样的，唯一改变的就是loss function，没有什么难点，求梯度部分在课程笔记之中并没有给出，所以需要自己手推。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> builtins <span class="keyword">import</span> range</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> shuffle</span><br><span class="line"><span class="keyword">from</span> past.builtins <span class="keyword">import</span> xrange</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Softmax loss function, naive implementation (with loops)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs have dimension D, there are C classes, and we operate on minibatches</span></span><br><span class="line"><span class="string">    of N examples.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - W: A numpy array of shape (D, C) containing weights.</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) containing a minibatch of data.</span></span><br><span class="line"><span class="string">    - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></span><br><span class="line"><span class="string">      that X[i] has label c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">    - reg: (float) regularization strength</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - loss as single float</span></span><br><span class="line"><span class="string">    - gradient with respect to weights W; an array of same shape as W</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># Initialize the loss and gradient to zero.</span></span><br><span class="line">    loss = <span class="number">0.0</span></span><br><span class="line">    dW = np.zeros_like(W)</span><br><span class="line">    num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">    num_class = W.shape[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_train) :</span><br><span class="line">        scores = X[i].dot(W)</span><br><span class="line">        scores = scores - max(scores)</span><br><span class="line">        loss_i = -scores[y[i]] + np.log(np.sum(np.exp(scores)))</span><br><span class="line">        loss += loss_i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(num_class) :</span><br><span class="line">            softmax = np.exp(scores[j])/np.sum(np.exp(scores))</span><br><span class="line">            <span class="keyword">if</span> j == y[i] :</span><br><span class="line">                dW[:,j] += (<span class="number">-1</span> + softmax) * X[i]</span><br><span class="line">            <span class="keyword">else</span> :</span><br><span class="line">                dW[:,j] += softmax * X[i]</span><br><span class="line">    loss /= num_train</span><br><span class="line">    loss += <span class="number">0.5</span> * reg * np.sum(W*W)</span><br><span class="line">    dW = dW/num_train + reg * W</span><br><span class="line">    <span class="keyword">return</span> loss, dW</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Softmax loss function, vectorized version.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs and outputs are the same as softmax_loss_naive.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># Initialize the loss and gradient to zero.</span></span><br><span class="line">    loss = <span class="number">0.0</span></span><br><span class="line">    dW = np.zeros_like(W)</span><br><span class="line">    num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">    num_class = W.shape[<span class="number">1</span>]</span><br><span class="line">    scores = X.dot(W)</span><br><span class="line">    scores = scores - np.max(scores,axis = <span class="number">1</span>).reshape((<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line">    softmax = np.exp(scores)/np.sum(np.exp(scores),axis = <span class="number">1</span>).reshape((<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line">    loss -= np.sum(np.log(softmax[np.arange(num_train),y]))</span><br><span class="line">    loss /= num_train</span><br><span class="line">    loss += <span class="number">0.5</span> * reg * np.sum(W*W)</span><br><span class="line">    softmax[np.arange(num_train),y] -= <span class="number">1</span></span><br><span class="line">    dW = (X.T).dot(softmax)</span><br><span class="line">    dW = dW/num_train + reg * W</span><br><span class="line">    <span class="keyword">return</span> loss, dW</span><br></pre></td></tr></table></figure>
-<p>终于要做到神经网络了，期待满满啊！</p>
+<h3 id="赛题要求"><a href="#赛题要求" class="headerlink" title="赛题要求"></a>赛题要求</h3><p>赛题其他要求不变，在之前找3-7环的基础上，加入以下条件</p>
+<blockquote>
+<p>  转账金额浮动区间约束为[0.2, 3] ：循环转账的前后路径的转账金额浮动，不能小于0.2，不能大于3。如账户A转给账户B 转X元，账户B转给账户C转Y元， 那么进行循环检测时，要满足0.2 &lt;= Y/X &lt;= 3的条件。</p>
+</blockquote>
+<p>同时，边数为200w，符合条件的环为2000w</p>
+<p>对边权加以限制，总的来说改变并不大，算法流程方面依旧选择了反向3层做可达剪枝 正向7层直接搜索的思路</p>
+<h3 id="数据载入"><a href="#数据载入" class="headerlink" title="数据载入"></a>数据载入</h3><p>读入方面，选择了mmap多线程读入的方式，对数据进行分4块处理(对于之前的28w边来说效果不大，对于200w的效果提升尚未进行测定)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">thread t[READ_THREAD_NUM];</span><br><span class="line">  <span class="keyword">int</span> last_p = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> ti = <span class="number">0</span>;ti &lt; READ_THREAD_NUM;++ti)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">long</span> <span class="keyword">long</span> p = (ti + <span class="number">1</span>) * Length / READ_THREAD_NUM;</span><br><span class="line">      <span class="keyword">while</span>(data[p<span class="number">-1</span>] != <span class="string">'\n'</span>)--p;</span><br><span class="line">      t[ti] = thread(magic_read,last_p,p,ti);</span><br><span class="line">      last_p = p;</span><br><span class="line">  &#125; </span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">int</span> ti = <span class="number">0</span>;ti &lt; READ_THREAD_NUM;++ti)t[ti].join();</span><br></pre></td></tr></table></figure>
+<p>由于需要映射，所以all（所有的id）需要进行排序，目前未想到有效解决方法</p>
+<h3 id="建图"><a href="#建图" class="headerlink" title="建图"></a>建图</h3><p>建图过程加入互斥锁，实现多线程建图，多线程对图的邻接表排序等，对于star（起点剪枝）需要进行排序以保证答案的有序性，目前未想到有效解决方法</p>
+<p>建图 有三个不同的图，分别为</p>
+<p>G 原图 存图方式为vector&lt;结构体&gt;[ 点数 （目前用最大边数200w代替）] 结构体内容为 边的终点与边权</p>
+<p>Ginv 原图的反向图 存图方式一样 依旧保存边的终点与边权 </p>
+<p>Gt 与之前的Gt一样 此处只保存 边的终点忽略边权 用于可达性剪枝</p>
+<p><strong>目前方案：</strong>排序方式依旧是按照点id从大到小，原因是保证答案的有序，避免对答案的排序（是否最优存疑？）</p>
+<p><strong>另一种思路：</strong>对边权排序，从而根据[0.2,3]的条件限制二分到大于等于0.2 * val 的位置，但是id顺序是乱的，排序较为耗时（不打算启用）</p>
+<p><strong>其他思路：</strong>暂无</p>
+<h3 id="找环算法-输出"><a href="#找环算法-输出" class="headerlink" title="找环算法 + 输出"></a>找环算法 + 输出</h3><p>找环算法与之前的思路类似，依旧是每次搜索以root为第一位的满足条件的环</p>
+<p>先Gt中三层反向搜索，标记可达 reach</p>
+<p>正向搜索过程中，首先遍历第一层时，可以根据第一条出边的边权确定起点root的入边边权范围，如果没有满足条件的入边则枚举下一条出边，即假设有环 …… y - &gt; root - &gt; x …… - &gt;y 则选择root -&gt; x作为出边时，val [root,x] / val [y,root]满足[0.2,3]约束的边y - &gt; root 是可以确定的，这样可以减少一部分搜索，属于<strong>“后向判断”</strong></p>
+<p><strong>“前向判断”</strong>发生在正向搜索过程之中，比如有root - &gt; u1 - &gt; u2 - &gt; u3 … 则应当依次正向判断相邻两边是否满足条件约束，后向判断可以看作是前向的剪枝？比如root - &gt; u1 - &gt; u2 - &gt; root 如果只采用前向判断，假设 root - &gt; u1 与u1- &gt; u2 是满足的，u1- &gt; u2 与 u2- &gt; root 是满足的，虽然此时搜索已经发现环了，但是对于整个环究竟满足条件与否还未能确定，因为 u2- &gt; root 与root - &gt; u1是否满足条件我们还不知道，后向判断可以解决此类问题</p>
+<p>后向判断需要Ginv，前向判断在G中，同时在第6层可以通过后向判断的标记以及存边权的方式可以减少搜索，因为在第6层，我们只需要u6 - &gt; root这一条边的边权 如果它满足前向与后向的判断那么这个7环就是可行的</p>
+<p>以上算法流程与之前初赛的算法流程执行时间大致相仿</p>
+<p>整个算法的目的就是为了用上[0.2,3]这一条件，同时不要让复杂度爆炸，难点在于只用前向判断， …… y - &gt; root - &gt; x …… - &gt;y  边y - &gt;root 与 root - x 是否满足约束条件</p>
+<p>然后找环算法过程中并未采取直接存char的方式，虽然这种方式初赛线下爆慢，线上居然有所提升，我认为这是数据集造的不好的问题，依旧是先存int，找完环之后把结果转为char</p>
+<p>整个找环过程多进程对id分段进行执行算法，进程间通信用的是共享内存mmap，以及进程间同步采用信号量的方式，主进程等待子进程 找环 + 答案int转char并分段拼接 + 把找环结果与字符串长度写入共享内存 这三步。主进程启动开始进行对各个子进程汇报信息的汇总并且做输出的准备工作，子进程挂起等待，主进程汇总答案结果，主进程计算各子进程应当开始载入数据的位置，mmap映射输出文件，调整文件大小，并将载入数据的位置信息写入共享内存，主进程任务结束等待子进程完成输出。子进程读共享内存的载入数据的位置信息，对对应的位置进行写入数据</p>
+<p>输出方面，mmap用的并不熟练，不知道是不是最优做法</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>多线程输入 多线程建图 多进程找环 多进程输出 </p>
 
       
     </div>
@@ -338,7 +362,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/cs231n/" rel="tag"># cs231n</a>
+            <a href="/tags/华为/" rel="tag"># 华为</a>
           
         </div>
       
@@ -351,8 +375,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/22/cs231n作业msvm/" rel="next" title="cs231n作业msvm">
-                <i class="fa fa-chevron-left"></i> cs231n作业msvm
+              <a href="/2020/04/16/华为codecraft2020初赛/" rel="next" title="华为codecraft2020初赛">
+                <i class="fa fa-chevron-left"></i> 华为codecraft2020初赛
               </a>
             
           </div>
@@ -360,10 +384,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/23/Codeforces-Round-621-Div-1-Div-2-题解/" rel="prev" title="Codeforces Round #621 (Div. 1 + Div. 2)题解">
-                Codeforces Round #621 (Div. 1 + Div. 2)题解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
